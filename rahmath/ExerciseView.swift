@@ -33,6 +33,8 @@ struct ExerciseView: View {
         modelObject(name:"telur",img: "object_egg"),
         modelObject(name:"pensil",img: "object_pencil"),
         modelObject(name:"donat",img: "object_donut"),
+        modelObject(name:"kacang",img: "object_peanut"),
+        modelObject(name:"bola",img: "object_ball"),
         modelObject(name:"kue",img: "object_cake"),
         modelObject(name:"kaca mata",img: "object_eyeglasses"),
     ]

@@ -28,6 +28,8 @@ struct TutorialView: View {
         modelObject(name:"pensil",img: "object_pencil"),
         modelObject(name:"donat",img: "object_donut"),
         modelObject(name:"kue",img: "object_cake"),
+        modelObject(name:"kacang",img: "object_peanut"),
+        modelObject(name:"bola",img: "object_ball"),
         modelObject(name:"kaca mata",img: "object_eyeglasses"),
     ]
     @State private var object_selected = modelObject()
