@@ -29,14 +29,14 @@ struct ExerciseView: View {
         //        modelObject(name:"bunga",img: "element_rose"),
         //        modelObject(name:"bunga",img: "element_sunflower"),
         //        modelObject(name:"bola",img: "element_ball"),
-        modelObject(name:"apel",img: "object_apple"),
-        modelObject(name:"telur",img: "object_egg"),
-        modelObject(name:"pensil",img: "object_pencil"),
-        modelObject(name:"donat",img: "object_donut"),
-        modelObject(name:"kacang",img: "object_peanut"),
-        modelObject(name:"bola",img: "object_ball"),
-        modelObject(name:"kue",img: "object_cake"),
-        modelObject(name:"kaca mata",img: "object_eyeglasses"),
+        modelObject(name:"apple",img: "object_apple"),
+        modelObject(name:"egg",img: "object_egg"),
+        modelObject(name:"pencil",img: "object_pencil"),
+        modelObject(name:"donut",img: "object_donut"),
+        modelObject(name:"peanut",img: "object_peanut"),
+        modelObject(name:"ball",img: "object_ball"),
+        modelObject(name:"cake",img: "object_cake"),
+        modelObject(name:"eyeglasses",img: "object_eyeglasses"),
     ]
     @State private var object_selected = modelObject()
     @State private var arr_object_question_1:[modelObjectQuestion] = []
