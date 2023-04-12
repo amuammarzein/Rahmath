@@ -430,7 +430,7 @@ struct TutorialView: View {
             
             ZStack(alignment: .bottom){
                 ZStack(){
-                    Image("basket_2").resizable().scaledToFit().frame(height:150)
+                    Image("basket_2").resizable().scaledToFit().frame(height:200)
                 }.zIndex(3).padding(.bottom,200)
                 ZStack(){
                     Circle().foregroundColor(Color("colorBlue").opacity(0.9)).frame(height:40).padding(.top,70)
