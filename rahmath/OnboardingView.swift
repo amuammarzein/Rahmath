@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+enum AnimationState {
+    case compress
+    case expand
+    case normal
+}
+
 struct OnboardingView: View {
     
     @State private var presentedParks: [Park] = []

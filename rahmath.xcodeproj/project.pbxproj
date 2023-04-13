@@ -11,7 +11,6 @@
 		BE87647F29DEFB35000B8CE0 /* ExplodingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE87647E29DEFB32000B8CE0 /* ExplodingView.swift */; };
 		BE9CEC8929D802F40055937C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9CEC8829D802F40055937C /* HomeView.swift */; };
 		BE9CEC8B29D866F20055937C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9CEC8A29D866F20055937C /* OnboardingView.swift */; };
-		BE9CEC8D29D86BDD0055937C /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9CEC8C29D86BDD0055937C /* SplashView.swift */; };
 		BEBE4D8229D5FF5E00C0FFFF /* rahmathApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBE4D8129D5FF5E00C0FFFF /* rahmathApp.swift */; };
 		BEBE4D8629D5FF5F00C0FFFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEBE4D8529D5FF5F00C0FFFF /* Assets.xcassets */; };
 		BEBE4D8929D5FF5F00C0FFFF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEBE4D8829D5FF5F00C0FFFF /* Preview Assets.xcassets */; };
@@ -51,7 +50,6 @@
 		BE87647E29DEFB32000B8CE0 /* ExplodingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplodingView.swift; sourceTree = "<group>"; };
 		BE9CEC8829D802F40055937C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		BE9CEC8A29D866F20055937C /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
-		BE9CEC8C29D86BDD0055937C /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SplashView.swift; path = Sound/SplashView.swift; sourceTree = "<group>"; };
 		BEBE4D7E29D5FF5E00C0FFFF /* Rahmath.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rahmath.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEBE4D8129D5FF5E00C0FFFF /* rahmathApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rahmathApp.swift; sourceTree = "<group>"; };
 		BEBE4D8529D5FF5F00C0FFFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -126,7 +124,6 @@
 				BEE62DE429D75D9700DA7B14 /* ResultView.swift */,
 				BE87647E29DEFB32000B8CE0 /* ExplodingView.swift */,
 				BE9CEC8A29D866F20055937C /* OnboardingView.swift */,
-				BE9CEC8C29D86BDD0055937C /* SplashView.swift */,
 				BEE62DDE29D7222E00DA7B14 /* TutorialView.swift */,
 				BE9CEC8829D802F40055937C /* HomeView.swift */,
 				BEBE4D8129D5FF5E00C0FFFF /* rahmathApp.swift */,
@@ -318,7 +315,6 @@
 				BE84549D29DD8CFB005F621F /* Utils.swift in Sources */,
 				BEE62DE129D7228700DA7B14 /* SelectHeroView.swift in Sources */,
 				BE9CEC8929D802F40055937C /* HomeView.swift in Sources */,
-				BE9CEC8D29D86BDD0055937C /* SplashView.swift in Sources */,
 				BEE62DE529D75D9700DA7B14 /* ResultView.swift in Sources */,
 				BE87647F29DEFB35000B8CE0 /* ExplodingView.swift in Sources */,
 			);
