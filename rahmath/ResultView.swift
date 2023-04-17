@@ -17,6 +17,10 @@ struct ResultView: View {
     @State private var text_3 = "One step closer to be the king of Math, Gain more badge to be great!"
     @State private var isActive = false
     
+    @State var animate: Bool = false
+    let animation: Animation = Animation.linear(duration: 5).repeatForever(autoreverses: false)
+    @State var movingIcon: Bool = false
+    
     
     @State private var screenWidth = UIScreen.main.bounds.size.width
     @State private var screenHeight = UIScreen.main.bounds.size.height
@@ -59,7 +63,10 @@ struct ResultView: View {
                         ExplodingView().zIndex(10)
                         Circle().foregroundColor(Color("colorGreen")).frame(width: 250).blur(radius: 50)
                         Image(img)
-                            .resizable().scaledToFit().frame(width: 150).shadow(color: .black, radius: 2, x: 3, y: 3)
+                            .resizable().scaledToFit().frame(width: 150).shadow(color: .black, radius: 2, x: 3, y: 3).offset(x:0,y: movingIcon ? -5 : 0)
+                            .animation(.spring(response: 1, dampingFraction: 0.0, blendDuration: 0.0).repeatForever(autoreverses: false), value: movingIcon).task {
+                                movingIcon.toggle()
+                            }
                         Image("hero_selected_badge")
                             .resizable().scaledToFit().frame(width: 280)
                             .shadow(color: .black, radius: 2, x: 3, y: 3)

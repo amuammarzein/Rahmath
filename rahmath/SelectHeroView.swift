@@ -58,7 +58,7 @@ struct SelectHeroView: View {
                     Image("hero_selected")
                         .resizable().scaledToFit().frame(width: screenWidth/1.8)
                     Image(hero_img)
-                        .resizable().scaledToFit().frame(width: screenWidth/2).shadow(color: .black, radius: 2, x: 3, y: 3)
+                        .resizable().scaledToFit().frame(width: screenWidth/2).shadow(color: .black, radius: 2, x: 3, y: 3).offset(x:0,y: movingIcon ? -5 : 0)
                         .animation(.spring(response: 1, dampingFraction: 0.0, blendDuration: 0.0).repeatForever(autoreverses: false), value: movingIcon).task {
                             movingIcon.toggle()
                         }
