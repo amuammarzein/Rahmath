@@ -91,7 +91,7 @@ func vibratorSetting(){
 struct SettingView: View{
     
     @AppStorage("SOUND_STATUS") var sound_status: Bool = true
-    @AppStorage("SOUND_ICON") var sound_icon:String = "mic.fill"
+    @AppStorage("SOUND_ICON") var sound_icon:String = "waveform"
     @AppStorage("MUSIC_STATUS") var music_status: Bool = true
     @AppStorage("MUSIC_ICON") var music_icon:String = "speaker.wave.2.fill"
     @AppStorage("VIBRATOR_STATUS") var vibrator_status: Bool = true
