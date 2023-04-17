@@ -12,6 +12,11 @@ struct SelectHeroView: View {
     @AppStorage("HERO_IMG") var hero_img: String = "avatar_2"
     @AppStorage("HERO_ID") var hero_id: String = "1"
     @AppStorage("HERO_NAME") var hero_name: String = "Rahmath"
+    
+    @State var animate: Bool = false
+    let animation: Animation = Animation.linear(duration: 5).repeatForever(autoreverses: false)
+    @State var movingIcon: Bool = false
+    
     @State private var arr_hero:[heroModel] = [
         heroModel(id:"1",name:"Octopus",img: "avatar_2",color:"colorGreen"),
         heroModel(id:"2",name:"Octopus",img: "avatar_1",color:"colorRed"),
@@ -54,6 +59,9 @@ struct SelectHeroView: View {
                         .resizable().scaledToFit().frame(width: screenWidth/1.8)
                     Image(hero_img)
                         .resizable().scaledToFit().frame(width: screenWidth/2).shadow(color: .black, radius: 2, x: 3, y: 3)
+                        .animation(.spring(response: 1, dampingFraction: 0.0, blendDuration: 0.0).repeatForever(autoreverses: false), value: movingIcon).task {
+                            movingIcon.toggle()
+                        }
                     Image("hero_selected_badge")
                         .resizable().scaledToFit().frame(width: screenWidth/2)
                         .shadow(color: .black, radius: 2, x: 3, y: 3)
