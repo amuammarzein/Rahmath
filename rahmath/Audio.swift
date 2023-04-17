@@ -59,5 +59,50 @@ func playSound(file_name: String){
             print(error.localizedDescription)
         }
     }
-    
 }
+
+var myQueuePlayer: AVQueuePlayer?
+
+var avItems: [AVPlayerItem] = []
+
+
+func playSoundMultiple(file_name: [String]){
+    sound_status = UserDefaults.standard.bool(forKey: "SOUND_STATUS")
+    if(sound_status==true){
+        
+        avItems.removeAll()
+        
+        var items: [String] = file_name
+        
+
+
+        for clip in items {
+            guard let url = Bundle.main.url(forResource: clip, withExtension: nil) else {
+                fatalError("Could not load \(clip).mp3")
+            }
+            avItems.append(AVPlayerItem(url: url))
+        }
+        
+        print(avItems)
+        if myQueuePlayer == nil {
+
+            myQueuePlayer = AVQueuePlayer(items: avItems)
+          
+
+        } else {
+
+            myQueuePlayer?.removeAllItems()
+          
+            avItems.forEach {
+                    myQueuePlayer?.insert($0, after: nil)
+                }
+
+        }
+        myQueuePlayer?.seek(to: .zero)
+        myQueuePlayer?.play()
+       
+    }
+}
+
+
+

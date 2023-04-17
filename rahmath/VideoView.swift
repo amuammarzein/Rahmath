@@ -1,20 +1,34 @@
-//
-//  VideoView.swift
-//  Rahmath
-//
-//  Created by Aang Muammar Zein on 15/04/23.
-//
+import UIKit
+import CoreImage
+import AVFoundation
 
-import SwiftUI
+class VideoView: GPUImageView {
+    var movie: GPUImageMovie!
+    var filter: GPUImageChromaKeyBlendFilter!
+    var sourcePicture: GPUImagePicture!
+    var player = AVPlayer()
 
-struct VideoView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+    func configureAndPlay(fileName: String) {
+        guard let url = Bundle.main.url(forResource: fileName, withExtension: "mp4") else { return }
+        let playerItem = AVPlayerItem(url: url)
+        player.replaceCurrentItem(with: playerItem)
 
-struct VideoView_Previews: PreviewProvider {
-    static var previews: some View {
-        VideoView()
+        filter = GPUImageChromaKeyBlendFilter()
+        filter.thresholdSensitivity = 0.15
+        filter.smoothing = 0.3
+        filter.setColorToReplaceRed(1, green: 0, blue: 1)
+
+        movie = GPUImageMovie(playerItem: playerItem)
+        movie.playAtActualSpeed = true
+        movie.addTarget(filter)
+        movie.startProcessing()
+
+        let backgroundImage = UIImage(named: "transparent.png")
+        sourcePicture = GPUImagePicture(image: backgroundImage, smoothlyScaleOutput: true)!
+        sourcePicture.addTarget(filter)
+        sourcePicture.processImage()
+
+        filter.addTarget(self)
+        player.play()
     }
 }

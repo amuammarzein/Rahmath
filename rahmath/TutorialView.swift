@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct TutorialView: View {
     
@@ -23,15 +24,16 @@ struct TutorialView: View {
         //        modelObject(name:"flower",img: "element_rose"),
         //        modelObject(name:"flower",img: "element_sunflower"),
         //        modelObject(name:"soccer ball",img: "element_ball"),
-        modelObject(name:"apple",img: "object_apple"),
-        modelObject(name:"egg",img: "object_egg"),
-        modelObject(name:"pencil",img: "object_pencil"),
-        modelObject(name:"donut",img: "object_donut"),
-        modelObject(name:"peanut",img: "object_peanut"),
-        modelObject(name:"ball",img: "object_ball"),
-        modelObject(name:"avocado",img: "object_avocado"),
-        modelObject(name:"cake",img: "object_cake"),
-        modelObject(name:"eyeglasses",img: "object_eyeglasses"),
+        modelObject(name:"apple",img: "object_apple",mp3:"object_apple.mp3"),
+        modelObject(name:"egg",img: "object_egg",mp3:"object_egg.mp3"),
+        modelObject(name:"pencil",img: "object_pencil",mp3:"object_pencil.mp3"),
+        modelObject(name:"donut",img: "object_donut",mp3:"object_donut.mp3"),
+        modelObject(name:"peanut",img: "object_peanut",mp3:"object_peanut.mp3"),
+        modelObject(name:"ball",img: "object_ball",mp3:"object_ball.mp3"),
+        modelObject(name:"avocado",img: "object_avocado",mp3:"object_avocado.mp3"),
+        modelObject(name:"ice cream",img: "object_icecream",mp3:"object_icecream.mp3"),
+        modelObject(name:"cake",img: "object_cake",mp3:"object_cake.mp3"),
+        modelObject(name:"eyeglasses",img: "object_eyeglasses",mp3:"object_eyeglasses.mp3"),
     ]
     @State private var object_selected = modelObject()
     @State private var arr_object_question_1:[modelObjectQuestion] = []
@@ -52,6 +54,7 @@ struct TutorialView: View {
     @State private var index = 0
     @State private var limit_question = 4
     @State private var check_answer = false
+    @State private var typeSays:String = ""
     @State private var num_question = 0
     @State private var answer_status = false
     @State private var option_selected = 0
@@ -62,6 +65,7 @@ struct TutorialView: View {
     @State private var total_object_in_box_2 = 0
     @State private var in_basket_status = false
     @State private var check_tutorial = false
+    @State private var saysGreat = false
     @State private var x_target_min = 100;
     @State private var x_target_max = 250;
     @State private var y_target_min = 280;
@@ -76,10 +80,13 @@ struct TutorialView: View {
     
     @State private var isActive = false
     
+    @State private var arrSays:[String] = []
+    
     struct modelObject:Identifiable{
         var id = UUID()
         var name:String = "nama object"
         var img:String = "object_default"
+        var mp3:String = "object_default.mp3"
     }
     struct modelObjectQuestion:Identifiable{
         var id:Int = 0
@@ -113,8 +120,25 @@ struct TutorialView: View {
         arr_object_question_1.removeAll()
         arr_object_question_2.removeAll()
     }
-    
+    func playSays(){
+        if(typeSays=="1"){
+            arrSays.removeAll()
+            arrSays = ["drag_the.mp3",object_selected.mp3,"to_the_basket.mp3"]
+            playSoundMultiple(file_name: arrSays)
+        }else if(typeSays=="2"){
+            arrSays.removeAll()
+            var numberMp3 = numberToMp3(number: num_2)
+            arrSays = ["great.mp3","now_drag.mp3",numberMp3,object_selected.mp3,"box.mp3"]
+            playSoundMultiple(file_name: arrSays)
+        }else if(typeSays=="3"){
+            arrSays.removeAll()
+            arrSays = ["correct.mp3"]
+            playSoundMultiple(file_name: arrSays)
+        }
+       
+    }
     func play(){
+        
         
         getHapticsNotify(.success)
         
@@ -210,12 +234,6 @@ struct TutorialView: View {
         
         
         
-        print(result)
-        
-        
-        
-        
-        
         
         
         index = Int.random(in: 0..<4)
@@ -237,13 +255,16 @@ struct TutorialView: View {
         index = Int.random(in: 0..<arr_object.count);
         object_selected = arr_object[index]
         
+        typeSays = "1"
         text = "Drag the "+object_selected.name+" to the basket! "
+        playSays()
     }
     
     
     func dragElement(index:Int,que:Int) -> some Gesture {
         DragGesture()
             .onChanged { value in
+                typeSays = ""
                 getHaptics(.soft)
                 if(que == 1){
                     self.arr_object_question_1[index].location = value.location
@@ -309,9 +330,11 @@ struct TutorialView: View {
                     
                     total_object_in_basket = total
                     if(total==result){
+                        typeSays = "3"
                         check_tutorial = true
-                        text = "Good Job! "+String(num_1)+" + "+String(num_2)+" = "+String(result)
+                        text = "Yeaayy!! "+String(num_1)+" + "+String(num_2)+" = "+String(result)
                     }else{
+                        typeSays = "1"
                         check_tutorial = false
                         text = "Drag the "+object_selected.name+" to the basket! "
                     }
@@ -333,6 +356,7 @@ struct TutorialView: View {
                     if(total==total_object){
                         in_basket_status = true
                     }else{
+                        typeSays = "1"
                         check_tutorial = false
                         text = "Drag the "+object_selected.name+" to the basket! "
                     }
@@ -388,23 +412,35 @@ struct TutorialView: View {
                         
                         if(total_object_in_box_2 == num_2){
                             if(total_object_in_basket == result){
-                                text = "Good Job! "+String(num_1)+" - "+String(num_2)+" = "+String(result)
+                                typeSays = "3"
+                                text = "Yeaayy!! "+String(num_1)+" - "+String(num_2)+" = "+String(result)
                                 check_tutorial = true
                             }else{
+                                typeSays = ""
                                 text = "Make sure there are no "+object_selected.name+" outside the basket!"
                                 check_tutorial = false
+                                
+                                
                             }
                         }else if(total_object_in_basket == result){
                             if(total_object_in_box_2 == num_2){
-                                text = "Good Job! "+String(num_1)+" - "+String(num_2)+" = "+String(result)
+                                typeSays = "3"
+                                text = "Yeaayy!! "+String(num_1)+" - "+String(num_2)+" = "+String(result)
                                 check_tutorial = true
                             }else{
+                                typeSays = "2"
                                 text = "Great! Now drag "+String(num_2)+" "+object_selected.name+" to the top right box! "
                                 check_tutorial = false
+                                
+                               
                             }
                         }else{
+                            typeSays = "2"
                             text = "Great! Now drag "+String(num_2)+" "+object_selected.name+" to the top right box! "
                             check_tutorial = false
+                    
+                          
+                            
                         }
                     }
                 }
@@ -417,9 +453,10 @@ struct TutorialView: View {
                     self.arr_object_question_2[index].isDragging = false
                 }
                 if(check_tutorial==true){
-                    playSound(file_name: "correct.mp3")
+                    typeSays = "3"
+//                    playSound(file_name: "correct.mp3")
                 }
-                
+                playSays()
             }
         
     }
@@ -440,7 +477,9 @@ struct TutorialView: View {
                 ZStack(alignment:.bottom){
                     VStack(){
                         Spacer()
-                        Text(text).multilineTextAlignment(.center).font(.system(size:20,weight: .light,design: .rounded)).padding(.bottom,30).padding(.trailing,20).padding(.leading,20)
+                        Text(text).multilineTextAlignment(.center).font(.system(size:20,weight: .light,design: .rounded)).padding(.bottom,30).padding(.trailing,20).padding(.leading,20).onTapGesture {
+                                playSays()
+                            }
                         if(check_tutorial == true && num_question < limit_question){
                             Button(
                                 action:{

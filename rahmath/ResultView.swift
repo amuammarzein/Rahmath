@@ -24,7 +24,11 @@ struct ResultView: View {
     
     
     func play(){
-        playSound(file_name: "complete.mp3")
+        if(correct_answer > 1){
+            playSound(file_name: "complete.mp3")
+        }else{
+            playSound(file_name: "incomplete.mp3")
+        }
         if(correct_answer == 4){
             img = "crown"
         }else if(correct_answer == 3){

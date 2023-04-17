@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import AVKit
 
 struct ExerciseView: View {
-    
+
     @AppStorage("BADGE_1") var badge_1: Int = 0
     @AppStorage("BADGE_2") var badge_2: Int = 0
     @AppStorage("BADGE_3") var badge_3: Int = 0
@@ -36,6 +37,7 @@ struct ExerciseView: View {
         modelObject(name:"peanut",img: "object_peanut"),
         modelObject(name:"ball",img: "object_ball"),
         modelObject(name:"avocado",img: "object_avocado"),
+        modelObject(name:"ice cream",img: "object_icecream"),
         modelObject(name:"cake",img: "object_cake"),
         modelObject(name:"eyeglasses",img: "object_eyeglasses"),
     ]
@@ -105,6 +107,7 @@ struct ExerciseView: View {
             playSound(file_name: "correct.mp3")
             correct_answer += 1
             img = "rahmath_2"
+
             answer_status = true
             arr_answer_selected.append(modelAnswerSelected(option: option_selected,status:true))
         }else{
@@ -144,6 +147,7 @@ struct ExerciseView: View {
     }
     
     func play(){
+        
         
         getHapticsNotify(.success)
         
@@ -223,7 +227,11 @@ struct ExerciseView: View {
     
     @State var isPop:Bool = false
     
+
+    
+    
     var body: some View {
+       
         NavigationStack{
             ScrollView(showsIndicators:false){
                 
@@ -272,13 +280,26 @@ struct ExerciseView: View {
                     }.padding(.bottom,20)
                     
                     
-                }.padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20))
+                }.padding(EdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 20))
+               
                 VStack(){
                     VStack(){
+                        
+                        
+                        
+                        
                         Image(img)
                             .resizable()
                             .scaledToFit()
                             .frame(width:100).padding(.bottom,20)
+                        
+//                        ZStack(alignment: .center){
+//                            
+//                            VideoPlayer(player: player)
+//                                .frame(width:300,height: 300).disabled(true)
+//                            
+//                        }
+                        
                         if(check_answer == true && num_question < limit_question){
                             Button(
                                 action:{
@@ -385,7 +406,7 @@ struct ExerciseView: View {
                         }
                     }.padding(EdgeInsets(top: 30, leading: 20, bottom: 150, trailing: 20)).background(Color("colorBlue"))
                 }.background(Color("colorBlue")).frame(maxWidth:screenWidth)
-            } .onAppear {
+            } .task {
                 play()
                 
             }

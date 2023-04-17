@@ -178,4 +178,9 @@ struct SettingView: View{
     }
 }
 
+func numberToMp3(number:Int)->String{
+    var arrNumberMp3 = ["one.mp3","two.mp3","three.mp3","four.mp3","five.mp3","six.mp3","seven.mp3","eight.mp3"]
+    return arrNumberMp3[number-1]
+}
+
 
