@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE05DBB629EE82D700771C5A /* backsound_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BE05DBB529EE82D700771C5A /* backsound_2.mp3 */; };
 		BE0FCA1229EAF0C3008FB42D /* great.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BE0FCA1129EAF0C3008FB42D /* great.mp3 */; };
 		BE0FCA1429EAF0C9008FB42D /* box.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BE0FCA1329EAF0C9008FB42D /* box.mp3 */; };
 		BE0FCA1629EAF0D1008FB42D /* now_drag.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BE0FCA1529EAF0D1008FB42D /* now_drag.mp3 */; };
@@ -73,6 +74,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BE05DBB529EE82D700771C5A /* backsound_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backsound_2.mp3; sourceTree = "<group>"; };
 		BE0FCA1129EAF0C3008FB42D /* great.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = great.mp3; sourceTree = "<group>"; };
 		BE0FCA1329EAF0C9008FB42D /* box.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = box.mp3; sourceTree = "<group>"; };
 		BE0FCA1529EAF0D1008FB42D /* now_drag.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = now_drag.mp3; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 				BE5A79C229ED3BCC000480D4 /* object_apple.mp3 */,
 				BE5A79C429ED3BCC000480D4 /* object_avocado.mp3 */,
 				BE5A79C529ED3BCC000480D4 /* object_ball.mp3 */,
+				BE05DBB529EE82D700771C5A /* backsound_2.mp3 */,
 				BE5A79C729ED3BCC000480D4 /* object_cake.mp3 */,
 				BE5A79BF29ED3BCC000480D4 /* object_donut.mp3 */,
 				BE5A79C329ED3BCC000480D4 /* object_egg.mp3 */,
@@ -362,6 +365,7 @@
 				BE0FCA2329EAF2C5008FB42D /* six.mp3 in Resources */,
 				BE5A79D129ED3BCC000480D4 /* object_cake.mp3 in Resources */,
 				BE0FCA2529EAF2C5008FB42D /* eight.mp3 in Resources */,
+				BE05DBB629EE82D700771C5A /* backsound_2.mp3 in Resources */,
 				BE0FCA2029EAF2C5008FB42D /* four.mp3 in Resources */,
 				BE5A79E729ED51D8000480D4 /* backsound.mp3 in Resources */,
 				BE0FCA2629EAF2C5008FB42D /* one.mp3 in Resources */,

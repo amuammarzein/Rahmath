@@ -10,6 +10,7 @@ import AVFoundation
 var playerSound: AVAudioPlayer!
 var playerMusic: AVAudioPlayer!
 var file_name = "backsound.mp3"
+//var file_name = "backsound_2.mp3"
 
 func stopMusic(){
     let url = Bundle.main.url(forResource: file_name, withExtension: nil)
