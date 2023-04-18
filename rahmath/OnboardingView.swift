@@ -61,7 +61,7 @@ struct OnboardingView: View {
                         }
                     }.frame(maxWidth: .infinity,maxHeight: screenHeight/2).background(Color("colorBlue"))
                     VStack(spacing:20){
-                        Text("Matematika Berkah!").font(.system(size: 32,weight: .bold,design: .rounded)).foregroundColor(Color("colorBlack"))
+                        Text("Revolution Math").font(.system(size: 32,weight: .bold,design: .rounded)).foregroundColor(Color("colorBlack"))
                         Text("Let's understand math. Learn with us!").font(.system(size: 20,weight: .light,design: .rounded)).foregroundColor(Color("colorBlack")).multilineTextAlignment(.center).padding(.bottom,50)
                         
                         NavigationLink(destination: SelectHeroView().navigationBarBackButtonHidden(true)) {

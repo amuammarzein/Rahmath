@@ -74,8 +74,7 @@ func playSoundMultiple(file_name: [String]){
         avItems.removeAll()
         
         var items: [String] = file_name
-        
-
+    
 
         for clip in items {
             guard let url = Bundle.main.url(forResource: clip, withExtension: nil) else {
