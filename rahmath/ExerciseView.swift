@@ -280,7 +280,7 @@ struct ExerciseView: View {
                     }.padding(.bottom,20)
                     
                     
-                }.padding(EdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 20))
+                }.padding(EdgeInsets(top: 20, leading: 20, bottom: 10, trailing: 20))
                
                 VStack(){
                     VStack(){
