@@ -516,7 +516,7 @@ struct TutorialView: View {
                                 Image(object_selected.img)
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(height:50).shadow(radius: 4,x:4,y:4).position(val.location).gesture(dragElement(index: val.id,que: 1))
+                                    .frame(height:val.isDragging==true ? 75 : 50).shadow(radius: 4,x:4,y:4).position(val.location).gesture(dragElement(index: val.id,que: 1))
                             }
                             
                         }.zIndex(1)
@@ -527,7 +527,7 @@ struct TutorialView: View {
                                 Image(object_selected.img)
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(height:50).shadow(radius: 4,x:4,y:4).position(val.location).gesture(dragElement(index: val.id - num_1,que: 2))
+                                    .frame(height:val.isDragging==true ? 75 : 50).shadow(radius: 4,x:4,y:4).position(val.location).gesture(dragElement(index: val.id - num_1,que: 2))
                             }
                         }.zIndex(1)
                         
