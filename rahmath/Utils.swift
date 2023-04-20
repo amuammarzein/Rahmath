@@ -169,7 +169,14 @@ struct SettingView: View{
                         .font(.system(size: 20,weight:.regular ,design: .rounded)).padding().frame(maxWidth: .infinity)
                     
                 }.buttonStyle(.borderedProminent).frame(maxWidth:.infinity)
-                    .buttonBorderShape(.capsule).compositingGroup()  .shadow(color:Color("colorRedDark"),radius: 0,x:1,y:5).padding(.top,20).padding(.leading,20).padding(.trailing,20)
+                    .buttonBorderShape(.capsule).compositingGroup()  .shadow(color:Color("colorRedDark"),radius: 0,x:1,y:5).padding(.top,20).padding(.leading,20).padding(.trailing,20).padding(.bottom,50)
+                
+                VStack(){
+                Text("Rahmath Team").font(.system(size:30,weight: .heavy,design:.rounded)).padding(.bottom,20)
+              
+                    Text("Aang, As'adi, Billbert, Ruci, Yaya").font(.system(size: 20,weight:.regular ,design: .rounded)).padding().frame(maxWidth: .infinity).padding(.top,-30)
+                }
+        
                 
             }
             .frame(maxWidth: .infinity)
