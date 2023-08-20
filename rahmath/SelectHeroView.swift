@@ -75,7 +75,7 @@ struct SelectHeroView: View {
                         .font(Font.system(size: 20, design: .rounded).weight(.bold)).padding(.leading, 20).padding(.top, 30).padding(.bottom, 0)
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10) {
-                            ForEach(0 ..< heroes.count) { index in
+                            ForEach(0 ..< heroes.count, id: \.self) { index in
                                 Button {
                                     selectHero(index: index)
                                     getHapticsNotify(.success)
@@ -113,7 +113,9 @@ struct SelectHeroView: View {
                             .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color("colorRed"), lineWidth: 3))
                             .padding(.trailing, 5).padding(.top, 4)
 
-                        NavigationLink(destination: HomeView().navigationBarBackButtonHidden(true), isActive: $isActive) {
+                        Button {
+                            isActive = true
+                        } label: {
                             Image(systemName: "play.fill")
                                 .fontWeight(.bold).frame(width: 50)
                                 .font(Font.system(size: 25, design: .rounded).weight(.bold))
@@ -123,6 +125,9 @@ struct SelectHeroView: View {
                                 .cornerRadius(15)
                                 .compositingGroup()
                                 .shadow(color: Color("colorRedDark"), radius: 0, x: 1, y: 5)
+                        }
+                        .navigationDestination(isPresented: $isActive) {
+                            HomeView().navigationBarBackButtonHidden(true)
                         }
 
                     }.padding(EdgeInsets(top: 10, leading: 20, bottom: 50, trailing: 20))

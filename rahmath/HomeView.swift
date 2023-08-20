@@ -162,14 +162,19 @@ struct HomeView: View {
                     .padding(.leading, 20)
                     .padding(.trailing, 20)
 
-                    NavigationLink(destination: ExerciseView().navigationBarBackButtonHidden(true), isActive: $isActive) {
+                    Button {
+
+                        isActive = true
+                    } label: {
                         Text("Play")
                             .foregroundColor(Color("colorGreen"))
                             .padding(3)
                             .font(.system(size: 20, weight: .regular, design: .rounded))
                             .padding(8)
                             .frame(maxWidth: .infinity)
-
+                    }
+                    .navigationDestination(isPresented: $isActive) {
+                        ExerciseView().navigationBarBackButtonHidden(true)
                     }
                     .buttonStyle(.borderedProminent)
                     .frame(maxWidth: .infinity)

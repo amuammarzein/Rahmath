@@ -451,21 +451,23 @@ struct TutorialView: View {
                             .shadow(color: Color("colorRedDark"), radius: 0, x: 1, y: 5)
                             .padding(.bottom, 20).padding(.leading, 20).padding(.trailing, 20)
                         } else if checkTutorial == true, numQuestion >= limitQuestion {
-                            NavigationLink(destination: HomeView().navigationBarBackButtonHidden(true), isActive: $isActive) {
+                            Button {
+                                isActive = true
+                            } label: {
                                 Text("Back to Home")
                                     .font(.system(size: 20, weight: .regular, design: .rounded))
                                     .padding()
                                     .frame(maxWidth: .infinity)
-
+                            }
+                            .navigationDestination(isPresented: $isActive) {
+                                HomeView().navigationBarBackButtonHidden(true)
                             }
                             .buttonStyle(.borderedProminent)
-                                .frame(maxWidth: .infinity)
-                                .buttonBorderShape(.capsule)
-                                .compositingGroup()
-                                .shadow(color: Color("colorRedDark"), radius: 0, x: 1, y: 5)
-                                .padding(.bottom, 20)
-                                .padding(.leading, 20)
-                                .padding(.trailing, 20)
+                            .frame(maxWidth: .infinity)
+                            .buttonBorderShape(.capsule)
+                            .compositingGroup()
+                            .shadow(color: Color("colorRedDark"), radius: 0, x: 1, y: 5)
+                            .padding(.bottom, 20).padding(.leading, 20).padding(.trailing, 20)
                         }
                     }
                 }

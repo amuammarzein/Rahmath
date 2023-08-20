@@ -111,7 +111,9 @@ struct ExerciseView: View {
                             .cornerRadius(15)
                             .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color("colorRed"), lineWidth: 3)).padding(.trailing, 5).padding(.top, 4)
 
-                        NavigationLink(destination: HomeView().navigationBarBackButtonHidden(true), isActive: $isActive) {
+                        Button {
+                            isActive = true
+                        } label: {
                             Image(systemName: "play.fill")
                                 .fontWeight(.bold).frame(width: 50)
                                 .font(Font.system(size: 25, design: .rounded).weight(.bold))
@@ -119,7 +121,9 @@ struct ExerciseView: View {
                                 .padding()
                                 .background(Color("colorRed")).cornerRadius(15).compositingGroup().shadow(color: Color("colorRedDark"), radius: 0, x: 1, y: 5)
                         }
-
+                        .navigationDestination(isPresented: $isActive) {
+                            HomeView().navigationBarBackButtonHidden(true)
+                        }
                     }.padding(EdgeInsets(top: 10, leading: 20, bottom: 50, trailing: 20))
 
                 }.background(Color("colorWhite")).cornerRadius(50).padding(.top, -50)

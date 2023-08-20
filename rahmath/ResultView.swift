@@ -82,19 +82,27 @@ struct ResultView: View {
                     Text(statusBadgeText)
                         .font(.system(size: 18, weight: .light, design: .rounded))
                         .multilineTextAlignment(.center)
-                    NavigationLink(destination: ExerciseView().navigationBarBackButtonHidden(true), isActive: $isActive) {
+
+                    Button {
+                        isActive = true
+
+                    } label: {
                         Text("Play again!")
                             .padding(3)
                             .font(.system(size: 20, weight: .regular, design: .rounded))
                             .padding(8)
                             .frame(maxWidth: .infinity)
+                    }
+                    .navigationDestination(isPresented: $isActive) {
+                        ExerciseView().navigationBarBackButtonHidden(true)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .frame(maxWidth: .infinity)
+                    .buttonBorderShape(.capsule)
+                    .compositingGroup()
+                    .shadow(color: Color("colorRedDark"), radius: 0, x: 1, y: 5)
+                    .padding(.top, 20)
 
-                    }.buttonStyle(.borderedProminent)
-                        .frame(maxWidth: .infinity)
-                        .buttonBorderShape(.capsule)
-                        .compositingGroup()
-                        .shadow(color: Color("colorRedDark"), radius: 0, x: 1, y: 5)
-                        .padding(.top, 20)
                     NavigationLink(destination: HomeView().navigationBarBackButtonHidden(true)) {
                         Text("I'll come back later")
                             .font(.system(size: 18, weight: .light, design: .rounded))
