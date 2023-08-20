@@ -58,8 +58,13 @@ struct SelectHeroView: View {
                     Image("heroSelected")
                         .resizable().scaledToFit().frame(width: screenWidth / 1.8)
                     Image(heroImg)
-                        .resizable().scaledToFit().frame(width: screenWidth / 2).shadow(color: .black, radius: 2, x: 3, y: 3).offset(x: 0, y: movingIcon ? -5 : 0)
-                        .animation(.spring(response: 1, dampingFraction: 0.0, blendDuration: 0.0).repeatForever(autoreverses: false), value: movingIcon).task {
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: screenWidth / 2)
+                        .shadow(color: .black, radius: 2, x: 3, y: 3)
+                        .offset(x: 0, y: movingIcon ? -5 : 0)
+                        .animation(.spring(response: 1, dampingFraction: 0.0, blendDuration: 0.0)
+                            .repeatForever(autoreverses: false), value: movingIcon).task {
                             movingIcon.toggle()
                         }
                     Image("heroSelected_badge")
@@ -67,7 +72,8 @@ struct SelectHeroView: View {
                         .shadow(color: .black, radius: 2, x: 3, y: 3)
 
                 }.onTapGesture {
-                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    UIApplication.shared.sendAction(
+                        #selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                 }
                 VStack(alignment: .leading) {
                     Color("colorWhite").edgesIgnoringSafeArea(.all)

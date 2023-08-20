@@ -36,7 +36,6 @@
 		BE87647F29DEFB35000B8CE0 /* ExplodingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE87647E29DEFB32000B8CE0 /* ExplodingView.swift */; };
 		BE9CEC8929D802F40055937C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9CEC8829D802F40055937C /* HomeView.swift */; };
 		BE9CEC8B29D866F20055937C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9CEC8A29D866F20055937C /* OnboardingView.swift */; };
-		BE9F796429EAD14D00E0385A /* backsound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BE9F795D29EAD14D00E0385A /* backsound.mp3 */; };
 		BE9F796529EAD14D00E0385A /* incorrect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BE9F795E29EAD14D00E0385A /* incorrect.mp3 */; };
 		BE9F796929EAD14D00E0385A /* correct.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BE9F796229EAD14D00E0385A /* correct.mp3 */; };
 		BE9F796A29EAD14D00E0385A /* to_the_basket.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BE9F796329EAD14D00E0385A /* to_the_basket.mp3 */; };
@@ -47,8 +46,6 @@
 		BEBE4D9329D5FF5F00C0FFFF /* rahmathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBE4D9229D5FF5F00C0FFFF /* rahmathTests.swift */; };
 		BEBE4D9D29D5FF5F00C0FFFF /* rahmathUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBE4D9C29D5FF5F00C0FFFF /* rahmathUITests.swift */; };
 		BEBE4D9F29D5FF5F00C0FFFF /* rahmathUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBE4D9E29D5FF5F00C0FFFF /* rahmathUITestsLaunchTests.swift */; };
-		BECA176029E68B99007FF034 /* correct.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BECA175C29E68B99007FF034 /* correct.mp3 */; };
-		BECA176229E68B99007FF034 /* incorrect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BECA175E29E68B99007FF034 /* incorrect.mp3 */; };
 		BEE62DDF29D7222E00DA7B14 /* TutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE62DDE29D7222E00DA7B14 /* TutorialView.swift */; };
 		BEE62DE129D7228700DA7B14 /* SelectHeroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE62DE029D7228700DA7B14 /* SelectHeroView.swift */; };
 		BEE62DE329D722A800DA7B14 /* ExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE62DE229D722A800DA7B14 /* ExerciseView.swift */; };
@@ -324,7 +321,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					BEBE4D7D29D5FF5E00C0FFFF = {
 						CreatedOnToolsVersion = 14.2;
@@ -381,7 +378,6 @@
 				BE0FCA1229EAF0C3008FB42D /* great.mp3 in Resources */,
 				BE5A79CA29ED3BCC000480D4 /* object_pencil.mp3 in Resources */,
 				BE0FCA1F29EAF2C5008FB42D /* five.mp3 in Resources */,
-				BE9F796429EAD14D00E0385A /* backsound.mp3 in Resources */,
 				BE0FCA2129EAF2C5008FB42D /* three.mp3 in Resources */,
 				BE9F796529EAD14D00E0385A /* incorrect.mp3 in Resources */,
 				BE0FCA2429EAF2C5008FB42D /* seven.mp3 in Resources */,
@@ -394,10 +390,8 @@
 				BE9F796A29EAD14D00E0385A /* to_the_basket.mp3 in Resources */,
 				BE5A79CD29ED3BCC000480D4 /* object_egg.mp3 in Resources */,
 				BE9F796C29EAD27B00E0385A /* incomplete.mp3 in Resources */,
-				BECA176229E68B99007FF034 /* incorrect.mp3 in Resources */,
 				BE5A79CC29ED3BCC000480D4 /* object_apple.mp3 in Resources */,
 				BE5A79D029ED3BCC000480D4 /* object_eyeglasses.mp3 in Resources */,
-				BECA176029E68B99007FF034 /* correct.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
