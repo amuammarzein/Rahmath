@@ -1,6 +1,6 @@
-import UIKit
-import CoreImage
 import AVFoundation
+import CoreImage
+import UIKit
 
 class VideoView: GPUImageView {
     var movie: GPUImageMovie!

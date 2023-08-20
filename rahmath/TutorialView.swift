@@ -1,609 +1,619 @@
 //
-//  ContentView.swift
+//  TutorialView.swift
 //  freedom
 //
 //  Created by Aang Muammar Zein on 31/03/23.
 //
 
-import SwiftUI
 import AVFoundation
+import SwiftUI
 
 struct TutorialView: View {
-    
     @State private var screenWidth = UIScreen.main.bounds.size.width
     @State private var screenHeight = UIScreen.main.bounds.size.height
-    @State private var arr_object:[modelObject] = [
-        //        modelObject(name:"motorcycle",img: "element_motor"),
-        //        modelObject(name:"apple",img: "element_apple"),
-        //        modelObject(name:"banana",img: "element_banana"),
-        //        modelObject(name:"orange",img: "element_orange"),
-        //        modelObject(name:"strawberry",img: "element_strawberry"),
-        //        modelObject(name:"balloon",img: "element_balloon"),
-        //        modelObject(name:"fish",img: "element_fish"),
-        //        modelObject(name:"car",img: "element_racing_car"),
-        //        modelObject(name:"flower",img: "element_rose"),
-        //        modelObject(name:"flower",img: "element_sunflower"),
-        //        modelObject(name:"soccer ball",img: "element_ball"),
-        modelObject(name:"apple",img: "object_apple",mp3:"object_apple.mp3"),
-        modelObject(name:"egg",img: "object_egg",mp3:"object_egg.mp3"),
-        modelObject(name:"pencil",img: "object_pencil",mp3:"object_pencil.mp3"),
-        modelObject(name:"donut",img: "object_donut",mp3:"object_donut.mp3"),
-        modelObject(name:"peanut",img: "object_peanut",mp3:"object_peanut.mp3"),
-        modelObject(name:"ball",img: "object_ball",mp3:"object_ball.mp3"),
-        modelObject(name:"avocado",img: "object_avocado",mp3:"object_avocado.mp3"),
-        modelObject(name:"ice cream",img: "object_icecream",mp3:"object_icecream.mp3"),
-        modelObject(name:"cake",img: "object_cake",mp3:"object_cake.mp3"),
-        modelObject(name:"eyeglasses",img: "object_eyeglasses",mp3:"object_eyeglasses.mp3"),
+    @State private var objects: [ModelObject] = [
+        ModelObject(name: "apple", img: "object_apple", mp3: "object_apple.mp3"),
+        ModelObject(name: "egg", img: "object_egg", mp3: "object_egg.mp3"),
+        ModelObject(name: "pencil", img: "object_pencil", mp3: "object_pencil.mp3"),
+        ModelObject(name: "donut", img: "object_donut", mp3: "object_donut.mp3"),
+        ModelObject(name: "peanut", img: "object_peanut", mp3: "object_peanut.mp3"),
+        ModelObject(name: "ball", img: "object_ball", mp3: "object_ball.mp3"),
+        ModelObject(name: "avocado", img: "object_avocado", mp3: "object_avocado.mp3"),
+        ModelObject(name: "ice cream", img: "object_icecream", mp3: "object_icecream.mp3"),
+        ModelObject(name: "cake", img: "object_cake", mp3: "object_cake.mp3"),
+        ModelObject(name: "eyeglasses", img: "object_eyeglasses", mp3: "object_eyeglasses.mp3")
     ]
-    @State private var object_selected = modelObject()
-    @State private var arr_object_question_1:[modelObjectQuestion] = []
-    @State private var arr_object_question_2:[modelObjectQuestion] = []
-    @State private var arr_answer_option:[modelAnswerOption] = [
-        modelAnswerOption(),
-        modelAnswerOption(),
-        modelAnswerOption(),
-        modelAnswerOption(),
+    @State private var objectSelected = ModelObject()
+    @State private var objectQuestion1: [ModelObjectQuestion] = []
+    @State private var objectQuestion2: [ModelObjectQuestion] = []
+    @State private var answerOptions: [ModelAnswerOption] = [
+        ModelAnswerOption(),
+        ModelAnswerOption(),
+        ModelAnswerOption(),
+        ModelAnswerOption()
     ]
-    @State private var arr_answer_selected:[modelAnswerSelected] = []
+    @State private var answersSelected: [ModelAnswerSelected] = []
     @State private var img = "rahmath_1"
-    @State private var num_1 = 0
-    @State private var num_2 = 0
+    @State private var num1 = 0
+    @State private var num2 = 0
     @State private var op = "+"
-    @State private var op_icon = "plus.circle"
+    @State private var operatorIcon = "plus.circle"
     @State private var result = 0
     @State private var index = 0
-    @State private var limit_question = 4
-    @State private var check_answer = false
-    @State private var typeSays:String = ""
-    @State private var num_question = 0
-    @State private var answer_status = false
-    @State private var option_selected = 0
-    @State private var correct_answer = 0
-    @State private var incorrect_answer = 0
-    @State private var total_object = 0
-    @State private var total_object_in_basket = 0
-    @State private var total_object_in_box_2 = 0
-    @State private var in_basket_status = false
-    @State private var check_tutorial = false
+    @State private var limitQuestion = 4
+    @State private var checkAnswer = false
+    @State private var typeSays: String = ""
+    @State private var numQuestion = 0
+    @State private var answerStatus = false
+    @State private var optionSelected = 0
+    @State private var correctAnswer = 0
+    @State private var incorrectAnswer = 0
+    @State private var totalObject = 0
+    @State private var totalObjectInBasket = 0
+    @State private var totalObjectInBox2 = 0
+    @State private var inBasketStatus = false
+    @State private var checkTutorial = false
     @State private var saysGreat = false
-    @State private var x_target_min = 100;
-    @State private var x_target_max = 250;
-    @State private var y_target_min = 280;
-    @State private var y_target_max = 420;
-    
-    @State private var x_target_2_min = 200;
-    @State private var x_target_2_max = 340;
-    @State private var y_target_2_min = 0;
-    @State private var y_target_2_max = 140;
-    
+    @State private var xTargetMin = 100
+    @State private var xTargetMax = 250
+    @State private var yTargetMin = 280
+    @State private var yTargetMax = 420
+
+    @State private var xTarget2Min = 200
+    @State private var xTarget2Max = 340
+    @State private var yTarget2Min = 0
+    @State private var yTarget2Max = 140
+
     @State private var text = ""
-    
+
     @State private var isActive = false
-    
-    @State private var arrSays:[String] = []
-    
-    struct modelObject:Identifiable{
+
+    @State private var arrSays: [String] = []
+
+    struct ModelObject: Identifiable {
         var id = UUID()
-        var name:String = "nama object"
-        var img:String = "object_default"
-        var mp3:String = "object_default.mp3"
+        var name: String = "nama object"
+        var img: String = "object_default"
+        var mp3: String = "object_default.mp3"
     }
-    struct modelObjectQuestion:Identifiable{
-        var id:Int = 0
-        var x:Int = 0
-        var y:Int = 0
-        var location: CGPoint = CGPoint(x: 0, y: 0)
+
+    struct ModelObjectQuestion: Identifiable {
+        var id: Int = 0
+        var x: Int = 0
+        var y: Int = 0
+        var location: CGPoint = .init(x: 0, y: 0)
         var isDragging = false
         var status = false
-        var status_minus = false
+        var statusMinus = false
     }
-    struct modelAnswerOption:Identifiable{
-        var id:Int = 0
-        var option:Int = 0
+
+    struct ModelAnswerOption: Identifiable {
+        var id: Int = 0
+        var option: Int = 0
         var status = false
     }
-    struct modelAnswerSelected:Identifiable{
-        var id:Int = 0
-        var option:Int = 0
+
+    struct ModelAnswerSelected: Identifiable {
+        var id: Int = 0
+        var option: Int = 0
         var status = false
     }
-    
-    
-    
-    
-    func reset(){
+
+    func reset() {
         index = 0
         result = 0
         img = "rahmath_1"
-        check_answer = false
-        in_basket_status = false
-        arr_object_question_1.removeAll()
-        arr_object_question_2.removeAll()
+        checkAnswer = false
+        inBasketStatus = false
+        objectQuestion1.removeAll()
+        objectQuestion2.removeAll()
     }
-    func playSays(){
-        if(typeSays=="1"){
+
+    func playSays() {
+        if typeSays == "1" {
             arrSays.removeAll()
-            arrSays = ["drag_the.mp3",object_selected.mp3,"to_the_basket.mp3"]
-            playSoundMultiple(file_name: arrSays)
-        }else if(typeSays=="2"){
+            arrSays = ["drag_the.mp3", objectSelected.mp3, "to_the_basket.mp3"]
+            playSoundMultiple(audioName: arrSays)
+        } else if typeSays == "2" {
             arrSays.removeAll()
-            var numberMp3 = numberToMp3(number: num_2)
-            arrSays = ["great.mp3","now_drag.mp3",numberMp3,object_selected.mp3,"box.mp3"]
-            playSoundMultiple(file_name: arrSays)
-        }else if(typeSays=="3"){
+            let numberMp3 = numberToMp3(number: num2)
+            arrSays = ["great.mp3", "now_drag.mp3", numberMp3, objectSelected.mp3, "box.mp3"]
+            playSoundMultiple(audioName: arrSays)
+        } else if typeSays == "3" {
             arrSays.removeAll()
             arrSays = ["correct.mp3"]
-            playSoundMultiple(file_name: arrSays)
+            playSoundMultiple(audioName: arrSays)
         }
-       
     }
-    func play(){
-        
-        
+
+    func play() {
         getHapticsNotify(.success)
-        
-        total_object_in_basket = 0
-        total_object_in_box_2 = 0
-        
-        check_tutorial = false
-        num_question += 1
+
+        totalObjectInBasket = 0
+        totalObjectInBox2 = 0
+
+        checkTutorial = false
+        numQuestion += 1
         reset()
-        
-        if(CGFloat(num_question)/CGFloat(limit_question)<=0.5){
+
+        if CGFloat(numQuestion) / CGFloat(limitQuestion) <= 0.5 {
             op = "+"
-            op_icon = "plus.circle"
-            num_1 = Int.random(in: 1..<5)
-            num_2 = Int.random(in: 1..<5)
-            total_object = num_1 + num_2
-            
-            result = num_1 + num_2;
-            
+            operatorIcon = "plus.circle"
+            num1 = Int.random(in: 1 ..< 5)
+            num2 = Int.random(in: 1 ..< 5)
+            totalObject = num1 + num2
+
+            result = num1 + num2
+
             var x = 40
             var y = 40
-            
-            for i in 0...(num_1-1) {
-                arr_object_question_1.append(modelObjectQuestion(id:index,x: x, y: y,location: CGPoint(x: x, y: y), isDragging: false))
+
+            for i in 0 ... (num1 - 1) {
+                objectQuestion1.append(
+                    ModelObjectQuestion(id: index, x: x, y: y, location: CGPoint(x: x, y: y), isDragging: false))
                 x += 60
-                if(i > 0 && i % 2 != 0){
+                if i > 0, i % 2 != 0 {
                     y += 60
                     x = 40
                 }
-                index = index + 1;
+                index += 1
             }
             x = 45
             y = 45
-            for i in 0...(num_2-1) {
-                arr_object_question_2.append(modelObjectQuestion(id:index,x: x, y: y,location: CGPoint(x: x, y: y), isDragging: false))
+            for i in 0 ... (num2 - 1) {
+                objectQuestion2.append(
+                    ModelObjectQuestion(id: index, x: x, y: y, location: CGPoint(x: x, y: y), isDragging: false))
                 x += 60
-                if(i > 0 && i % 2 != 0){
+                if i > 0, i % 2 != 0 {
                     y += 60
                     x = 40
                 }
-                index = index + 1;
+                index += 1
             }
-            
-        }else{
+
+        } else {
             op = "-"
-            op_icon = "minus.circle"
-            op_icon = "minus.circle"
-            num_1 = Int.random(in: 1..<5)
-            num_2 = Int.random(in: 0..<num_1)
-            if(num_2==0){
-                num_2 = 1
+            operatorIcon = "minus.circle"
+            operatorIcon = "minus.circle"
+            num1 = Int.random(in: 1 ..< 5)
+            num2 = Int.random(in: 0 ..< num1)
+            if num2 == 0 {
+                num2 = 1
             }
-            total_object = num_1
-            
-            result = num_1 - num_2;
-            
+            totalObject = num1
+
+            result = num1 - num2
+
             var x = 40
             var y = 40
-            if(num_1 < 5){
-                for i in 0...(num_1-1) {
-                    arr_object_question_1.append(modelObjectQuestion(id:index,x: x, y: y,location: CGPoint(x: x, y: y), isDragging: false))
+            if num1 < 5 {
+                for i in 0 ... (num1 - 1) {
+                    objectQuestion1.append(
+                        ModelObjectQuestion(id: index, x: x, y: y, location: CGPoint(x: x, y: y), isDragging: false))
                     x += 60
-                    if(i > 0 && i % 2 != 0){
+                    if i > 0, i % 2 != 0 {
                         y += 60
                         x = 40
                     }
-                    index = index + 1;
+                    index += 1
                 }
-            }else{
-                for i in 0...(3) {
-                    arr_object_question_1.append(modelObjectQuestion(id:index,x: x, y: y,location: CGPoint(x: x, y: y), isDragging: false))
+            } else {
+                for i in 0 ... 3 {
+                    objectQuestion1.append(
+                        ModelObjectQuestion(id: index, x: x, y: y, location: CGPoint(x: x, y: y), isDragging: false))
                     x += 60
-                    if(i > 0 && i % 2 != 0){
+                    if i > 0, i % 2 != 0 {
                         y += 60
                         x = 40
                     }
-                    index = index + 1;
+                    index += 1
                 }
                 x = 45
                 y = 45
-                for i in 4...(num_1-1) {
-                    arr_object_question_1.append(modelObjectQuestion(id:index,x: x, y: y,location: CGPoint(x: x, y: y), isDragging: false))
+                for i in 4 ... (num1 - 1) {
+                    objectQuestion1.append(
+                        ModelObjectQuestion(id: index, x: x, y: y, location: CGPoint(x: x, y: y), isDragging: false))
                     x += 60
-                    if(i > 0 && i % 2 != 0){
+                    if i > 0, i % 2 != 0 {
                         y += 60
                         x = 40
                     }
-                    index = index + 1;
-                }
-            }
-            
-        }
-        
-        
-        
-        
-        
-        index = Int.random(in: 0..<4)
-        arr_answer_option[index] = modelAnswerOption(id: index,option: result)
-        
-        for i in 0...3 {
-            if(i != index){
-                for j in 0...100 {
-                    var option = Int.random(in: 1..<9)
-                    if(option != arr_answer_option[0].option
-                       && option != arr_answer_option[1].option && option != arr_answer_option[2].option &&
-                       option != arr_answer_option[3].option){
-                        arr_answer_option[i] = modelAnswerOption(id: i,option: option)
-                        break;
-                    }
+                    index += 1
                 }
             }
         }
-        index = Int.random(in: 0..<arr_object.count);
-        object_selected = arr_object[index]
-        
+
+        index = Int.random(in: 0 ..< 4)
+        answerOptions[index] = ModelAnswerOption(id: index, option: result)
+
+        for i in 0 ... 3 where i != index {
+            for _ in 0 ... 100 {
+                let option = Int.random(in: 1 ..< 9)
+                if option != answerOptions[0].option,
+                    option != answerOptions[1].option, option != answerOptions[2].option,
+                    option != answerOptions[3].option {
+                    answerOptions[i] = ModelAnswerOption(id: i, option: option)
+                    break
+                }
+            }
+        }
+        index = Int.random(in: 0 ..< objects.count)
+        objectSelected = objects[index]
+
         typeSays = "1"
-        text = "Drag the "+object_selected.name+" to the basket! "
+        text = "Drag the " + objectSelected.name + " to the basket! "
         playSays()
     }
-    
-    
-    func dragElement(index:Int,que:Int) -> some Gesture {
+
+    func setLocationStatus(index: Int, value: DragGesture.Value, num: Int) -> Bool {
+        if Int(value.location.x) >= xTargetMin - num,
+           Int(value.location.x) <= xTargetMax - num,
+           Int(value.location.y) >= yTargetMin,
+           Int(value.location.y) <= yTargetMax {
+            return true
+        }
+        return false
+    }
+
+    func setLocationStatusMinus(index: Int, value: DragGesture.Value, num: Int) -> Bool {
+        if Int(value.location.x) >= xTarget2Min - num,
+           Int(value.location.x) <= xTarget2Max - num,
+           Int(value.location.y) >= yTarget2Min,
+           Int(value.location.y) <= yTarget2Max {
+            return true
+        }
+        return false
+    }
+
+    func countTotalStatus() -> Int {
+        var total = 0
+        objectQuestion1.forEach { result in
+            if result.status == true {
+                total += 1
+            }
+        }
+
+        objectQuestion2.forEach { result in
+            if result.status == true {
+                total += 1
+            }
+        }
+
+        return total
+    }
+
+    func countTotalStatusMinus() -> Int {
+        var total = 0
+        objectQuestion1.forEach { result in
+            if result.statusMinus == true {
+                total += 1
+            }
+        }
+
+        objectQuestion2.forEach { result in
+            if result.statusMinus == true {
+                total += 1
+            }
+        }
+
+        return total
+    }
+
+    func dragElement(index: Int, que: Int) -> some Gesture {
         DragGesture()
             .onChanged { value in
                 typeSays = ""
                 getHaptics(.soft)
-                if(que == 1){
-                    self.arr_object_question_1[index].location = value.location
-                    self.arr_object_question_1[index].isDragging = true
-                    
-                    print("Object #",(index+1))
-                    print("x : ",value.location.x)
-                    print("y : ",value.location.y)
-                    print("q : ",que)
-                    print("i : ",index)
-                    
-                    
-                    if((Int(value.location.x) >= x_target_min && Int(value.location.x) <= x_target_max) && (Int(value.location.y) >= y_target_min && Int(value.location.y) <= y_target_max)){
-                        arr_object_question_1[index].status = true;
-                    }else{
-                        arr_object_question_1[index].status = false;
-                    }
-                    
-                    
-                }else{
-                    self.arr_object_question_2[index].location = value.location
-                    self.arr_object_question_2[index].isDragging = true
-                    
-                    print("Object #",(index+1+num_1))
-                    print("x : ",value.location.x)
-                    print("y : ",value.location.y)
-                    print("q : ",que)
-                    print("i : ",index)
-                    
-                    if((Int(value.location.x) >= x_target_min-200 && Int(value.location.x) <= x_target_max-200) && (Int(value.location.y) >= y_target_min && Int(value.location.y) <= y_target_max)){
-                        arr_object_question_2[index].status = true;
-                    }else{
-                        arr_object_question_2[index].status = false;
-                    }
-                    
-                    
+                if que == 1 {
+                    objectQuestion1[index].location = value.location
+                    objectQuestion1[index].isDragging = true
+                    objectQuestion1[index].status = setLocationStatus(index: index, value: value, num: 0)
+                } else {
+                    objectQuestion2[index].location = value.location
+                    objectQuestion2[index].isDragging = true
+                    objectQuestion2[index].status = setLocationStatus(index: index, value: value, num: 200)
                 }
-                
-                
-                
-                
-                
-                if(op == "+"){
-                    var total = 0
-                    arr_object_question_1.forEach { result in
-                        if(result.status==true){
-                            total = total + 1
-                        }
-                    }
-                    
-                    arr_object_question_2.forEach { result in
-                        if(result.status==true){
-                            total = total + 1
-                        }
-                    }
-                    
-                    
-                    //                        if(total == result){
-                    //                            img = "rahmath_2"
-                    //                        }else{
-                    //                            img = "rahmath_1"
-                    //                        }
-                    
-                    total_object_in_basket = total
-                    if(total==result){
+
+                if op == "+" {
+                    let total = countTotalStatus()
+
+                    totalObjectInBasket = total
+                    if total == result {
                         typeSays = "3"
-                        check_tutorial = true
-                        text = "Yeaayy!! "+String(num_1)+" + "+String(num_2)+" = "+String(result)
-                    }else{
+                        checkTutorial = true
+                        text = "Yeaayy!! " + String(num1) + " + " + String(num2) + " = " + String(result)
+                    } else {
                         typeSays = "1"
-                        check_tutorial = false
-                        text = "Drag the "+object_selected.name+" to the basket! "
+                        checkTutorial = false
+                        text = "Drag the " + objectSelected.name + " to the basket! "
                     }
-                }else if(op == "-"){
-                    var total = 0
-                    arr_object_question_1.forEach { result in
-                        if(result.status==true){
-                            total = total + 1
-                        }
-                    }
-                    
-                    arr_object_question_2.forEach { result in
-                        if(result.status==true){
-                            total = total + 1
-                        }
-                    }
-                    total_object_in_basket = total
-                    
-                    if(total==total_object){
-                        in_basket_status = true
-                    }else{
+                } else if op == "-" {
+                    let total = countTotalStatus()
+                    totalObjectInBasket = total
+
+                    if total == totalObject {
+                        inBasketStatus = true
+                    } else {
                         typeSays = "1"
-                        check_tutorial = false
-                        text = "Drag the "+object_selected.name+" to the basket! "
+                        checkTutorial = false
+                        text = "Drag the " + objectSelected.name + " to the basket! "
                     }
-                    if(in_basket_status==true){
-                        if(que == 1){
-                            self.arr_object_question_1[index].location = value.location
-                            self.arr_object_question_1[index].isDragging = true
-                            
-                            print("Object #",(index+1))
-                            print("x : ",value.location.x)
-                            print("y : ",value.location.y)
-                            print("q : ",que)
-                            print("i : ",index)
-                            
-                            
-                            if((Int(value.location.x) >= x_target_2_min && Int(value.location.x) <= x_target_2_max) && (Int(value.location.y) >= y_target_2_min && Int(value.location.y) <= y_target_2_max)){
-                                arr_object_question_1[index].status_minus = true;
-                            }else{
-                                arr_object_question_1[index].status_minus = false;
-                            }
-                            
-                        }else{
-                            self.arr_object_question_2[index].location = value.location
-                            self.arr_object_question_2[index].isDragging = true
-                            
-                            print("Object #",(index+1+num_1))
-                            print("x : ",value.location.x)
-                            print("y : ",value.location.y)
-                            print("q : ",que)
-                            print("i : ",index)
-                            
-                            if((Int(value.location.x) >= x_target_2_min-200 && Int(value.location.x) <= x_target_2_max-200) && (Int(value.location.y) >= y_target_2_min && Int(value.location.y) <= y_target_2_max)){
-                                arr_object_question_2[index].status_minus = true;
-                            }else{
-                                arr_object_question_2[index].status_minus = false;
-                            }
-                            
+                    if inBasketStatus == true {
+                        if que == 1 {
+                            objectQuestion1[index].location = value.location
+                            objectQuestion1[index].isDragging = true
+                            objectQuestion1[index].statusMinus = setLocationStatusMinus(
+                                index: index,
+                                value: value,
+                                num: 0)
+
+                        } else {
+                            objectQuestion2[index].location = value.location
+                            objectQuestion2[index].isDragging = true
+                            objectQuestion2[index].statusMinus = setLocationStatusMinus(
+                                index: index,
+                                value: value,
+                                num: 200)
                         }
-                        
-                        var total_2 = 0
-                        arr_object_question_1.forEach { result in
-                            if(result.status_minus==true){
-                                total_2 += 1
-                            }
-                        }
-                        
-                        arr_object_question_2.forEach { result in
-                            if(result.status_minus==true){
-                                total_2 += 1
-                            }
-                        }
-                        total_object_in_box_2 = total_2
-                        
-                        if(total_object_in_box_2 == num_2){
-                            if(total_object_in_basket == result){
+
+                        let total2 = countTotalStatusMinus()
+                        totalObjectInBox2 = total2
+
+                        if totalObjectInBox2 == num2 {
+                            if totalObjectInBasket == result {
                                 typeSays = "3"
-                                text = "Yeaayy!! "+String(num_1)+" - "+String(num_2)+" = "+String(result)
-                                check_tutorial = true
-                            }else{
+                                text = "Yeaayy!! " + String(num1) + " - " + String(num2) + " = " + String(result)
+                                checkTutorial = true
+                            } else {
                                 typeSays = ""
-                                text = "Make sure there are no "+object_selected.name+" outside the basket!"
-                                check_tutorial = false
-                                
-                                
+                                text = "Make sure there are no " + objectSelected.name + " outside the basket!"
+                                checkTutorial = false
                             }
-                        }else if(total_object_in_basket == result){
-                            if(total_object_in_box_2 == num_2){
+                        } else if totalObjectInBasket == result {
+                            if totalObjectInBox2 == num2 {
                                 typeSays = "3"
-                                text = "Yeaayy!! "+String(num_1)+" - "+String(num_2)+" = "+String(result)
-                                check_tutorial = true
-                            }else{
+                                text = "Yeaayy!! " + String(num1) + " - " + String(num2) + " = " + String(result)
+                                checkTutorial = true
+                            } else {
                                 typeSays = "2"
-                                text = "Great! Now drag "+String(num_2)+" "+object_selected.name+" to the top right box! "
-                                check_tutorial = false
-                                
-                               
+                                text = "Great! Now drag " + String(num2) + " " + objectSelected.name + " to the top right box! "
+                                checkTutorial = false
                             }
-                        }else{
+                        } else {
                             typeSays = "2"
-                            text = "Great! Now drag "+String(num_2)+" "+object_selected.name+" to the top right box! "
-                            check_tutorial = false
-                    
-                          
-                            
+                            text = "Great! Now drag " + String(num2) + " " + objectSelected.name + " to the top right box! "
+                            checkTutorial = false
                         }
                     }
                 }
-                
             }
-            .onEnded {_ in
-                if(que == 1){
-                    self.arr_object_question_1[index].isDragging = false
-                }else{
-                    self.arr_object_question_2[index].isDragging = false
+            .onEnded { _ in
+                if que == 1 {
+                    objectQuestion1[index].isDragging = false
+                } else {
+                    objectQuestion2[index].isDragging = false
                 }
-                if(check_tutorial==true){
+                if checkTutorial == true {
                     typeSays = "3"
 //                    playSound(file_name: "correct.mp3")
                 }
                 playSays()
             }
-        
     }
-    
-    @State var isPop:Bool = false
-    
+
+    @State var isPop: Bool = false
+
     var body: some View {
-        NavigationStack{
-            
-            ZStack(alignment: .bottom){
-                ZStack(){
-                    Image("basket_2").resizable().scaledToFit().frame(height:200)
-                }.zIndex(3).padding(.bottom,200)
-                ZStack(){
-                    Circle().foregroundColor(Color("colorBlue").opacity(0.9)).frame(height:40).padding(.top,70)
-                    Text(String(total_object_in_basket)).font(.system(size:20,weight: .heavy)).foregroundColor(Color("colorWhite")).frame(height:60).padding(.top,70)
-                }.zIndex(5).padding(.bottom,200)
-                ZStack(alignment:.bottom){
-                    VStack(){
+        NavigationStack {
+            ZStack(alignment: .bottom) {
+                ZStack {
+                    Image("basket_2").resizable().scaledToFit().frame(height: 200)
+                }.zIndex(3).padding(.bottom, 200)
+                ZStack {
+                    Circle().foregroundColor(Color("colorBlue").opacity(0.9)).frame(height: 40).padding(.top, 70)
+                    Text(String(totalObjectInBasket))
+                        .font(.system(size: 20, weight: .heavy))
+                        .foregroundColor(Color("colorWhite"))
+                        .frame(height: 60)
+                        .padding(.top, 70)
+                }
+                .zIndex(5)
+                .padding(.bottom, 200)
+                ZStack(alignment: .bottom) {
+                    VStack {
                         Spacer()
-                        Text(text).multilineTextAlignment(.center).font(.system(size:20,weight: .light,design: .rounded)).padding(.bottom,30).padding(.trailing,20).padding(.leading,20).onTapGesture {
-                                playSays()
-                            }
-                        if(check_tutorial == true && num_question < limit_question){
-                            Button(
-                                action:{
-                                    if(num_question < limit_question){
-                                        play()
-                                    }
+                        Text(text)
+                            .multilineTextAlignment(.center)
+                            .font(.system(size: 20, weight: .light, design: .rounded))
+                            .padding(.bottom, 30)
+                            .padding(.trailing, 20)
+                            .padding(.leading, 20)
+                            .onTapGesture {
+                            playSays()
+                        }
+                        if checkTutorial == true, numQuestion < limitQuestion {
+                            Button {
+                                if numQuestion < limitQuestion {
+                                    play()
+
                                 }
-                            ){
+                            } label: {
                                 Text("Next Tutorial")
-                                    .font(.system(size: 20,weight:.regular ,design: .rounded)).padding().frame(maxWidth: .infinity)
-                                
-                            }.buttonStyle(.borderedProminent).frame(maxWidth:.infinity)
-                                .buttonBorderShape(.capsule).compositingGroup()  .shadow(color:Color("colorRedDark"),radius: 0,x:1,y:5).padding(.bottom,20).padding(.leading,20).padding(.trailing,20)
-                        }else if(check_tutorial == true && num_question>=limit_question){
+                                    .font(.system(size: 20, weight: .regular, design: .rounded))
+                                    .padding()
+                                    .frame(maxWidth: .infinity)
+
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .frame(maxWidth: .infinity)
+                            .buttonBorderShape(.capsule)
+                            .compositingGroup()
+                            .shadow(color: Color("colorRedDark"), radius: 0, x: 1, y: 5)
+                            .padding(.bottom, 20).padding(.leading, 20).padding(.trailing, 20)
+                        } else if checkTutorial == true, numQuestion >= limitQuestion {
                             NavigationLink(destination: HomeView().navigationBarBackButtonHidden(true), isActive: $isActive) {
                                 Text("Back to Home")
-                                    .font(.system(size: 20,weight:.regular ,design: .rounded)).padding().frame(maxWidth: .infinity)
-                                
-                            }.buttonStyle(.borderedProminent).frame(maxWidth:.infinity)
-                                .buttonBorderShape(.capsule).compositingGroup()  .shadow(color:Color("colorRedDark"),radius: 0,x:1,y:5).padding(.bottom,20).padding(.leading,20).padding(.trailing,20)
+                                    .font(.system(size: 20, weight: .regular, design: .rounded))
+                                    .padding()
+                                    .frame(maxWidth: .infinity)
+
+                            }
+                            .buttonStyle(.borderedProminent)
+                                .frame(maxWidth: .infinity)
+                                .buttonBorderShape(.capsule)
+                                .compositingGroup()
+                                .shadow(color: Color("colorRedDark"), radius: 0, x: 1, y: 5)
+                                .padding(.bottom, 20)
+                                .padding(.leading, 20)
+                                .padding(.trailing, 20)
                         }
                     }
-                }.zIndex(4).padding(.leading,20).padding(.trailing,20).padding(.top,130)
-                
-                
-                
-                
-                
-                ZStack(){
-                    HStack(alignment:.top){
-                        ZStack(alignment:.top){
-                            
-                            ForEach(arr_object_question_1) { val in
-                                Image(object_selected.img)
+                }
+                .zIndex(4)
+                .padding(.leading, 20)
+                .padding(.trailing, 20)
+                .padding(.top, 130)
+
+                ZStack {
+                    HStack(alignment: .top) {
+                        ZStack(alignment: .top) {
+                            ForEach(objectQuestion1) { val in
+                                Image(objectSelected.img)
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(height:val.isDragging==true ? 75 : 50).shadow(radius: 4,x:4,y:4).position(val.location).gesture(dragElement(index: val.id,que: 1))
+                                    .frame(height: val.isDragging == true ? 75 : 50)
+                                    .shadow(radius: 4, x: 4, y: 4)
+                                    .position(val.location)
+                                    .gesture(dragElement(index: val.id, que: 1))
                             }
-                            
+
                         }.zIndex(1)
-                        Image(systemName: op_icon).font(.system(size: 50, weight: .bold)).foregroundColor(Color("colorWhite")).padding(.top, 40).frame(width:50).opacity(0)
-                        ZStack(alignment:.top){
-                            
-                            ForEach(arr_object_question_2) { val in
-                                Image(object_selected.img)
+                        Image(systemName: operatorIcon)
+                            .font(.system(size: 50, weight: .bold))
+                            .foregroundColor(Color("colorWhite"))
+                            .padding(.top, 40).frame(width: 50)
+                            .opacity(0)
+                        ZStack(alignment: .top) {
+                            ForEach(objectQuestion2) { val in
+                                Image(objectSelected.img)
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(height:val.isDragging==true ? 75 : 50).shadow(radius: 4,x:4,y:4).position(val.location).gesture(dragElement(index: val.id - num_1,que: 2))
+                                    .frame(height: val.isDragging == true ? 75 : 50)
+                                    .shadow(radius: 4, x: 4, y: 4)
+                                    .position(val.location)
+                                    .gesture(dragElement(index: val.id - num1, que: 2))
                             }
-                        }.zIndex(1)
-                        
+                        }
+                        .zIndex(1)
                     }
-                }.zIndex(6).padding(.leading,20).padding(.trailing,20).padding(.top,130)
-                
-                
-                ZStack(){
-                    if(check_tutorial == true){
+                }
+                .zIndex(6)
+                    .padding(.leading, 20).padding(.trailing, 20).padding(.top, 130)
+
+                ZStack {
+                    if checkTutorial == true {
                         ExplodingView()
                     }
-                    HStack(alignment:.top){
-                        ZStack(alignment:.top){
-                            
-                            Rectangle().frame(height:150).cornerRadius(46 ).foregroundColor(Color("colorWhite").opacity(0.3))
-                            ForEach(arr_object_question_1) { val in
-                                Image(object_selected.img)
+                    HStack(alignment: .top) {
+                        ZStack(alignment: .top) {
+                            Rectangle()
+                                .frame(height: 150)
+                                .cornerRadius(46)
+                                .foregroundColor(Color("colorWhite")
+                                    .opacity(0.3))
+                            ForEach(objectQuestion1) { val in
+                                Image(objectSelected.img)
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(height:50).position(val.location).opacity(0)
+                                    .frame(height: 50)
+                                    .position(val.location)
+                                    .opacity(0)
                             }
-                            ZStack(){
-                                Circle().foregroundColor(Color("colorBlue").opacity(0.9)).frame(height:40)
-                                Text(String(num_1)).font(.system(size:20,weight: .heavy)).foregroundColor(Color("colorWhite")).frame(height:40)
-                            }.offset(y:50)
-                            
+                            ZStack {
+                                Circle().foregroundColor(Color("colorBlue").opacity(0.9)).frame(height: 40)
+                                Text(String(num1))
+                                    .font(.system(size: 20, weight: .heavy))
+                                    .foregroundColor(Color("colorWhite"))
+                                    .frame(height: 40)
+                            }.offset(y: 50)
                         }
-                        Image(systemName: op_icon).font(.system(size: 50, weight: .bold)).foregroundColor(Color("colorWhite")).padding(.top, 40).frame(width:50)
-                        ZStack(alignment:.top){
-                            Rectangle().frame(height:150).cornerRadius(46 ).foregroundColor(Color("colorWhite").opacity(0.3))
-                            ForEach(arr_object_question_2) { val in
-                                Image(object_selected.img)
+                        Image(systemName: operatorIcon)
+                            .font(.system(size: 50, weight: .bold))
+                            .foregroundColor(Color("colorWhite"))
+                            .padding(.top, 40).frame(width: 50)
+                        ZStack(alignment: .top) {
+                            Rectangle()
+                                .frame(height: 150)
+                                .cornerRadius(46)
+                                .foregroundColor(Color("colorWhite")
+                                    .opacity(0.3))
+                            ForEach(objectQuestion2) { val in
+                                Image(objectSelected.img)
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(height:50).position(val.location).opacity(0)
+                                    .frame(height: 50)
+                                    .position(val.location)
+                                    .opacity(0)
                             }
-                            ZStack(){
-                                Circle().foregroundColor(Color("colorBlue").opacity(0.9)).frame(height:40)
-                                Text(String(num_2)).font(.system(size:20,weight: .heavy)).foregroundColor(Color("colorWhite")).frame(height:40)
-                            }.offset(y:50)
-                            
+                            ZStack {
+                                Circle()
+                                    .foregroundColor(Color("colorBlue")
+                                        .opacity(0.9))
+                                    .frame(height: 40)
+                                Text(String(num2))
+                                    .font(.system(size: 20, weight: .heavy))
+                                    .foregroundColor(Color("colorWhite"))
+                                    .frame(height: 40)
+                            }.offset(y: 50)
                         }
-                        
                     }
-                }.zIndex(5).padding(.leading,20).padding(.trailing,20).padding(.top,130)
-                
-                
-                VStack(spacing:20){
-                    HStack(alignment: .top){
-                        Text("Tutorial #"+String(num_question)
-                        ).font(.system(size: 25, weight: .bold,design: .rounded
-                                      ))
-                        
+                }
+                .zIndex(5)
+                .padding(.leading, 20)
+                .padding(.trailing, 20)
+                .padding(.top, 130)
+
+                VStack(spacing: 20) {
+                    HStack(alignment: .top) {
+                        Text("Tutorial #" + String(numQuestion)
+                        ).font(.system(size: 25, weight: .bold, design: .rounded))
+
                         Spacer()
-                        
-                        
-                        SettingView(isPop:$isPop)
-                        
+
+                        SettingView(isPop: $isPop)
                     }
-                    ZStack(alignment: .leading){
-                        Rectangle().frame(height:24).cornerRadius(20).padding(.bottom,10).foregroundColor(Color("colorGrey")).opacity(0.5)
-                        Rectangle().frame(width:((screenWidth-40) * (CGFloat(num_question)/CGFloat(limit_question))),height:24).cornerRadius(20).padding(.bottom,10).foregroundColor(Color("colorGreen"))
+                    ZStack(alignment: .leading) {
+                        Rectangle()
+                            .frame(height: 24)
+                            .cornerRadius(20)
+                            .padding(.bottom, 10)
+                            .foregroundColor(Color("colorGrey"))
+                            .opacity(0.5)
+                        Rectangle()
+                            .frame(width: (screenWidth - 40) * (CGFloat(numQuestion) / CGFloat(limitQuestion)), height: 24)
+                            .cornerRadius(20)
+                            .padding(.bottom, 10)
+                            .foregroundColor(Color("colorGreen"))
                     }
                     Spacer()
-                }.padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)).frame(maxWidth: .infinity,maxHeight: .infinity).background(Color("colorBlue")).zIndex(1)
-                
-                Rectangle().foregroundColor(Color("colorWhite")).cornerRadius(40).frame(height:screenHeight-350).padding(.bottom,-50).zIndex(2)
-                
-                
-                
-            } .onAppear {
+
+                }
+                .padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color("colorBlue"))
+                    .zIndex(1)
+
+                Rectangle()
+                    .foregroundColor(Color("colorWhite"))
+                    .cornerRadius(40)
+                    .frame(height: screenHeight - 350)
+                    .padding(.bottom, -50)
+                    .zIndex(2)
+
+            }.onAppear {
                 play()
-                
             }
         }
-        
     }
 }
 

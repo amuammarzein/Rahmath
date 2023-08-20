@@ -74,6 +74,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B38EF8A42A91FA80004A9458 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		BE05DBB529EE82D700771C5A /* backsound_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backsound_2.mp3; sourceTree = "<group>"; };
 		BE0FCA1129EAF0C3008FB42D /* great.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = great.mp3; sourceTree = "<group>"; };
 		BE0FCA1329EAF0C9008FB42D /* box.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = box.mp3; sourceTree = "<group>"; };
@@ -155,6 +156,7 @@
 		BEBE4D7529D5FF5E00C0FFFF = {
 			isa = PBXGroup;
 			children = (
+				B38EF8A42A91FA80004A9458 /* .swiftlint.yml */,
 				BEC3603729D97E7000F19A9D /* Info.plist */,
 				BEBE4D8029D5FF5E00C0FFFF /* rahmath */,
 				BEBE4D9129D5FF5F00C0FFFF /* rahmathTests */,
@@ -267,6 +269,7 @@
 				BEBE4D7A29D5FF5E00C0FFFF /* Sources */,
 				BEBE4D7B29D5FF5E00C0FFFF /* Frameworks */,
 				BEBE4D7C29D5FF5E00C0FFFF /* Resources */,
+				B33BA82C2A9119B80018DE63 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -413,6 +416,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B33BA82C2A9119B80018DE63 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BEBE4D7A29D5FF5E00C0FFFF /* Sources */ = {

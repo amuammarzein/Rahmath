@@ -1,0 +1,20 @@
+# at v0.6.0
+disabled_rules:
+  - force_cast
+  - force_try
+  - function_body_length
+  - line_length
+  - nesting
+  - todo
+  - type_body_length
+  - type_name
+  - variable_name
+  - variable_name_min_length
+file_length:
+  warning: 500
+variable_name:
+  max_length:
+    warning: 45
+    error: 60
+  min_length:
+    warning: 0

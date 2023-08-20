@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct rahmathApp: App {
+struct RahmathApp: App {
     var body: some Scene {
         WindowGroup {
             OnboardingView()
