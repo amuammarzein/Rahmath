@@ -106,7 +106,8 @@ struct OnboardingView: View {
                     Image("logo_rahmath")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .scaleEffect(calculate()).shadow(radius: 4, x: 4, y: 4)
+                        .scaleEffect(calculate())
+                        .shadow(radius: 4, x: 4, y: 4)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color("colorBlue"))

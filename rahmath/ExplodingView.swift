@@ -17,7 +17,10 @@ struct ExplodingView: View {
                         .frame(width: 20, height: 20)
                         .foregroundColor(Color("colorBlue"))
                         /* #-code-walkthrough(3b.explodingAnimation) */
-                        .offset(x: isExploded ? (Double.random(in: -1 ... 1) * 500) : 0, y: isExploded ? (Double.random(in: -1 ... 1) * 500) : 0)
+                        .offset(x: isExploded ? (
+                            Double.random(in: -1 ... 1) * 500) : 0, y: isExploded ? (
+                                Double.random(in: -1 ... 1) * 500) : 0
+                        )
                         /* #-code-walkthrough(3b.explodingAnimation) */
                         /* #-code-walkthrough(4.explodingAnimation) */
                         .opacity(isExploded ? 0 : 1)

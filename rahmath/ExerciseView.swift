@@ -9,70 +9,59 @@ import SwiftUI
 
 struct ExerciseView: View {
     @AppStorage("BADGE_1") var badge1: Int = 0
-    @AppStorage("BADGE_2") var badge_2: Int = 0
-    @AppStorage("BADGE_3") var badge_3: Int = 0
-    @AppStorage("TOTAL_CORRECT") var total_correct: Int = 0
-    @AppStorage("TOTAL_INCORRECT") var total_incorrect: Int = 0
-    @AppStorage("TOTAL_QUESTION") var total_question: Int = 0
+    @AppStorage("BADGE_2") var badge2: Int = 0
+    @AppStorage("BADGE_3") var badge3: Int = 0
+    @AppStorage("TOTAL_CORRECT") var totalCorrect: Int = 0
+    @AppStorage("TOTAL_INCORRECT") var totalIncorrect: Int = 0
+    @AppStorage("TOTAL_QUESTION") var totalQuestion: Int = 0
     @State private var screenWidth = UIScreen.main.bounds.size.width
     @State private var screenHeight = UIScreen.main.bounds.size.height
-    @State private var arr_object: [modelObject] = [
-        //        modelObject(name:"motor",img: "element_motor"),
-        //        modelObject(name:"apel",img: "element_apple"),
-        //        modelObject(name:"pisang",img: "element_banana"),
-        //        modelObject(name:"jeruk",img: "element_orange"),
-        //        modelObject(name:"strawberry",img: "element_strawberry"),
-        //        modelObject(name:"balon",img: "element_balloon"),
-        //        modelObject(name:"ikan",img: "element_fish"),
-        //        modelObject(name:"mobil",img: "element_racing_car"),
-        //        modelObject(name:"bunga",img: "element_rose"),
-        //        modelObject(name:"bunga",img: "element_sunflower"),
-        //        modelObject(name:"bola",img: "element_ball"),
-        modelObject(name: "apple", img: "object_apple"),
-        modelObject(name: "egg", img: "object_egg"),
-        modelObject(name: "pencil", img: "object_pencil"),
-        modelObject(name: "donut", img: "object_donut"),
-        modelObject(name: "peanut", img: "object_peanut"),
-        modelObject(name: "ball", img: "object_ball"),
-        modelObject(name: "avocado", img: "object_avocado"),
-        modelObject(name: "ice cream", img: "object_icecream"),
-        modelObject(name: "cake", img: "object_cake"),
-        modelObject(name: "eyeglasses", img: "object_eyeglasses")
+    @State private var objects: [ModelObjectExercise] = [
+        ModelObjectExercise(name: "apple", img: "object_apple"),
+        ModelObjectExercise(name: "egg", img: "object_egg"),
+        ModelObjectExercise(name: "pencil", img: "object_pencil"),
+        ModelObjectExercise(name: "donut", img: "object_donut"),
+        ModelObjectExercise(name: "peanut", img: "object_peanut"),
+        ModelObjectExercise(name: "ball", img: "object_ball"),
+        ModelObjectExercise(name: "avocado", img: "object_avocado"),
+        ModelObjectExercise(name: "ice cream", img: "object_icecream"),
+        ModelObjectExercise(name: "cake", img: "object_cake"),
+        ModelObjectExercise(name: "eyeglasses", img: "object_eyeglasses")
     ]
-    @State private var object_selected = modelObject()
-    @State private var arr_object_question_1: [modelObjectQuestion] = []
-    @State private var arr_object_question_2: [modelObjectQuestion] = []
-    @State private var arr_answer_option: [modelAnswerOption] = [
-        modelAnswerOption(),
-        modelAnswerOption(),
-        modelAnswerOption(),
-        modelAnswerOption()
+    @State private var selectedObject = ModelObjectExercise()
+    @State private var objectsQuestion1: [ModelObjectQuestionExercise] = []
+    @State private var objectQuestion2: [ModelObjectQuestionExercise] = []
+    @State private var optionsAnswer: [ModelAnswerQuestionExercise] = [
+        ModelAnswerQuestionExercise(),
+        ModelAnswerQuestionExercise(),
+        ModelAnswerQuestionExercise(),
+        ModelAnswerQuestionExercise()
     ]
-    @State private var arr_answer_selected: [modelAnswerSelected] = []
+    @State private var selectedAnswers: [ModelAnswerSelectedExercise] = []
     @State private var img = "rahmath_1"
-    @State private var num_1 = 0
-    @State private var num_2 = 0
+    @State private var num1 = 0
+    @State private var num2 = 0
     @State private var op = "+"
-    @State private var op_icon = "plus.circle"
+    @State private var operatorIcon = "plus.circle"
     @State private var result = 0
     @State private var index = 0
-    @State private var limit_question = 4
-    @State private var check_answer = false
-    @State private var num_question = 0
-    @State private var answer_status = false
-    @State private var option_selected = 0
-    @State private var correct_answer = 0
-    @State private var incorrect_answer = 0
+    @State private var questionLimit = 4
+    @State private var checkAnswer = false
+    @State private var questionNum = 0
+    @State private var answerStatus = false
+    @State private var optionSelected = 0
+    @State private var correctAnswer = 0
+    @State private var incorrectAnswer = 0
 
     @State private var isActive = false
 
-    struct modelObject: Identifiable {
+    struct ModelObjectExercise: Identifiable {
         var id = UUID()
         var name: String = "nama object"
         var img: String = "object_default"
     }
 
-    struct modelObjectQuestion: Identifiable {
+    struct ModelObjectQuestionExercise: Identifiable {
         var id: Int = 0
         var x: Int = 0
         var y: Int = 0
@@ -81,98 +70,105 @@ struct ExerciseView: View {
         var status = false
     }
 
-    struct modelAnswerOption: Identifiable {
+    struct ModelAnswerQuestionExercise: Identifiable {
         var id: Int = 0
         var option: Int = 0
         var status = false
     }
 
-    struct modelAnswerSelected: Identifiable {
+    struct ModelAnswerSelectedExercise: Identifiable {
         var id: Int = 0
         var option: Int = 0
         var status = false
     }
 
     func answerCheck(option: Int) {
-        check_answer = true
-        option_selected = option
+        checkAnswer = true
+        optionSelected = option
         if result == option {
             getHapticsNotify(.success)
             playSound(audioName: "correct.mp3")
-            correct_answer += 1
+            correctAnswer += 1
             img = "rahmath_2"
 
-            answer_status = true
-            arr_answer_selected.append(modelAnswerSelected(option: option_selected, status: true))
+            answerStatus = true
+            selectedAnswers.append(ModelAnswerSelectedExercise(option: optionSelected, status: true))
         } else {
             getHapticsNotify(.warning)
             playSound(audioName: "incorrect.mp3")
-            incorrect_answer += 1
+            incorrectAnswer += 1
             img = "rahmath_3"
-            answer_status = false
-            arr_answer_selected.append(modelAnswerSelected(option: option_selected, status: false))
+            answerStatus = false
+            selectedAnswers.append(ModelAnswerSelectedExercise(option: optionSelected, status: false))
         }
-        if num_question == limit_question {
+        if questionNum == questionLimit {
             calculate_badge()
         }
-        print("Answer Check : " + String(check_answer))
+        print("Answer Check : " + String(checkAnswer))
     }
 
     func calculate_badge() {
-        if correct_answer == 4 {
+        if correctAnswer == 4 {
             badge1 += 1
-        } else if correct_answer == 3 {
-            badge_2 += 1
-        } else if correct_answer == 2 {
-            badge_3 += 1
+        } else if correctAnswer == 3 {
+            badge2 += 1
+        } else if correctAnswer == 2 {
+            badge3 += 1
         }
-        total_correct += correct_answer
-        total_incorrect += incorrect_answer
-        total_question += num_question
+        totalCorrect += correctAnswer
+        totalIncorrect += incorrectAnswer
+        totalQuestion += questionNum
     }
 
     func reset() {
         index = 0
         result = 0
         img = "rahmath_1"
-        check_answer = false
-        arr_object_question_1.removeAll()
-        arr_object_question_2.removeAll()
+        checkAnswer = false
+        objectsQuestion1.removeAll()
+        objectQuestion2.removeAll()
     }
 
     func play() {
         getHapticsNotify(.success)
 
-        num_question += 1
+        questionNum += 1
         reset()
-        print("Question : " + String(num_question))
-        print("Limit : " + String(limit_question))
-        print("Answer Check : " + String(check_answer))
+        print("Question : " + String(questionNum))
+        print("Limit : " + String(questionLimit))
+        print("Answer Check : " + String(checkAnswer))
 
-        if CGFloat(num_question) / CGFloat(limit_question) <= 0.5 {
+        if CGFloat(questionNum) / CGFloat(questionLimit) <= 0.5 {
             op = "+"
-            op_icon = "plus.circle"
-            num_1 = Int.random(in: 1 ..< 5)
-            num_2 = Int.random(in: 1 ..< 5)
+            operatorIcon = "plus.circle"
+            num1 = Int.random(in: 1 ..< 5)
+            num2 = Int.random(in: 1 ..< 5)
 
-            result = num_1 + num_2
+            result = num1 + num2
 
         } else {
             op = "-"
-            op_icon = "minus.circle"
-            num_1 = Int.random(in: 1 ..< 5)
-            num_2 = Int.random(in: 0 ..< num_1)
-            if num_2 == 0 {
-                num_2 = 1
+            operatorIcon = "minus.circle"
+            num1 = Int.random(in: 1 ..< 5)
+            num2 = Int.random(in: 0 ..< num1)
+            if num2 == 0 {
+                num2 = 1
             }
 
-            result = num_1 - num_2
+            result = num1 - num2
         }
 
         var x = 40
         var y = 40
-        for i in 0 ... (num_1 - 1) {
-            arr_object_question_1.append(modelObjectQuestion(id: index, x: x, y: y, location: CGPoint(x: x, y: y), isDragging: false))
+        for i in 0 ... (num1 - 1) {
+            objectsQuestion1.append(
+                ModelObjectQuestionExercise(
+                    id: index,
+                    x: x,
+                    y: y,
+                    location: CGPoint(x: x, y: y),
+                    isDragging: false)
+            )
             x += 60
             if i > 0, i % 2 != 0 {
                 y += 60
@@ -183,8 +179,15 @@ struct ExerciseView: View {
 
         x = 40
         y = 40
-        for i in 0 ... (num_2 - 1) {
-            arr_object_question_2.append(modelObjectQuestion(id: index, x: x, y: y, location: CGPoint(x: x, y: y), isDragging: false))
+        for i in 0 ... (num2 - 1) {
+            objectQuestion2.append(
+                ModelObjectQuestionExercise(
+                    id: index,
+                    x: x,
+                    y: y,
+                    location: CGPoint(x: x, y: y),
+                    isDragging: false)
+            )
             x += 60
             if i > 0, i % 2 != 0 {
                 y += 60
@@ -194,22 +197,22 @@ struct ExerciseView: View {
         }
 
         index = Int.random(in: 0 ..< 4)
-        arr_answer_option[index] = modelAnswerOption(id: index, option: result)
+        optionsAnswer[index] = ModelAnswerQuestionExercise(id: index, option: result)
 
         for i in 0 ... 3 where i != index {
                 for _ in 0 ... 100 {
                     let option = Int.random(in: 1 ..< 9)
-                    if option != arr_answer_option[0].option,
-                       option != arr_answer_option[1].option,
-                       option != arr_answer_option[2].option,
-                       option != arr_answer_option[3].option {
-                        arr_answer_option[i] = modelAnswerOption(id: i, option: option)
+                    if option != optionsAnswer[0].option,
+                       option != optionsAnswer[1].option,
+                       option != optionsAnswer[2].option,
+                       option != optionsAnswer[3].option {
+                        optionsAnswer[i] = ModelAnswerQuestionExercise(id: i, option: option)
                         break
                     }
                 }
         }
-        index = Int.random(in: 0 ..< arr_object.count)
-        object_selected = arr_object[index]
+        index = Int.random(in: 0 ..< objects.count)
+        selectedObject = objects[index]
     }
 
     @State var isPop: Bool = false
@@ -219,7 +222,7 @@ struct ExerciseView: View {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 20) {
                     HStack {
-                        Text("Question #" + String(num_question)
+                        Text("Question #" + String(questionNum)
                         ).font(.system(size: 25, weight: .bold, design: .rounded))
                         Spacer()
                         SettingView(isPop: $isPop)
@@ -232,15 +235,21 @@ struct ExerciseView: View {
                             .foregroundColor(Color("colorGrey"))
                             .opacity(0.3)
                         Rectangle()
-                            .frame(width: (screenWidth - 40) * (CGFloat(num_question) / CGFloat(limit_question)), height: 24).cornerRadius(20)
+                            .frame(width:
+                                    (screenWidth - 40) * (CGFloat(questionNum) / CGFloat(questionLimit)),
+                                   height: 24)
+                            .cornerRadius(20)
                             .padding(.bottom, 10)
                             .foregroundColor(Color("colorGreen"))
                     }
                     HStack {
                         ZStack {
-                            Rectangle().frame(height: 150).cornerRadius(46).foregroundColor(Color("colorBlue"))
-                            ForEach(arr_object_question_1) { val in
-                                Image(object_selected.img)
+                            Rectangle()
+                                .frame(height: 150)
+                                .cornerRadius(46)
+                                .foregroundColor(Color("colorBlue"))
+                            ForEach(objectsQuestion1) { val in
+                                Image(selectedObject.img)
                                     .resizable()
                                     .scaledToFit()
                                     .frame(height: 50).shadow(radius: 4, x: 4, y: 4).position(val.location)
@@ -251,12 +260,12 @@ struct ExerciseView: View {
                                     .foregroundColor(Color("colorWhite")
                                         .opacity(0.5))
                                     .frame(height: 40)
-                                Text(String(num_1))
+                                Text(String(num1))
                                     .font(.system(size: 20, weight: .heavy))
                                     .foregroundColor(Color("colorWhite")).frame(height: 40)
                             }.offset(y: 50)
                         }
-                        Image(systemName: op_icon)
+                        Image(systemName: operatorIcon)
                             .font(.system(size: 50, weight: .bold))
                             .foregroundColor(Color("colorBlue"))
                             .frame(width: 50)
@@ -265,8 +274,8 @@ struct ExerciseView: View {
                                 .frame(height: 150)
                                 .cornerRadius(46)
                                 .foregroundColor(Color("colorBlue"))
-                            ForEach(arr_object_question_2) { val in
-                                Image(object_selected.img)
+                            ForEach(objectQuestion2) { val in
+                                Image(selectedObject.img)
                                     .resizable()
                                     .scaledToFit()
                                     .frame(height: 50)
@@ -277,7 +286,7 @@ struct ExerciseView: View {
                                     .foregroundColor(Color("colorWhite")
                                         .opacity(0.5))
                                     .frame(height: 40)
-                                Text(String(num_2))
+                                Text(String(num2))
                                     .font(.system(size: 20, weight: .heavy))
                                     .foregroundColor(Color("colorWhite"))
                                     .frame(height: 40)
@@ -294,9 +303,9 @@ struct ExerciseView: View {
                             .scaledToFit()
                             .frame(width: 100).padding(.bottom, 20)
 
-                        if check_answer == true, num_question < limit_question {
+                        if checkAnswer == true, questionNum < questionLimit {
                             Button {
-                                if num_question < limit_question {
+                                if questionNum < questionLimit {
                                     play()
                                 }
                             } label: {
@@ -312,7 +321,7 @@ struct ExerciseView: View {
                             .compositingGroup()
                             .shadow(color: Color("colorRedDark"), radius: 0, x: 1, y: 5)
                             .padding(.bottom, 20).padding(.leading, 20).padding(.trailing, 20)
-                        } else if check_answer == true, num_question >= limit_question {
+                        } else if checkAnswer == true, questionNum >= questionLimit {
 
                             Button {
                                 isActive = true
@@ -323,7 +332,7 @@ struct ExerciseView: View {
                                     .frame(maxWidth: .infinity)
                             }
                             .navigationDestination(isPresented: $isActive) {
-                                ResultView(correctAnswer: correct_answer, numberOfQuestion: num_question)
+                                ResultView(correctAnswer: correctAnswer, numberOfQuestion: questionNum)
                                     .navigationBarBackButtonHidden(true)
                             }
                             .buttonStyle(.borderedProminent)
@@ -339,17 +348,19 @@ struct ExerciseView: View {
                     .cornerRadius(40).padding(.top, -30)
 
                     VStack(spacing: 30) {
-                        if check_answer == false {
+                        if checkAnswer == false {
                             HStack(spacing: 30) {
                                 ForEach(0 ..< 2) { index in
                                     Button {
-                                            answerCheck(option: arr_answer_option[index].option)
+                                            answerCheck(option: optionsAnswer[index].option)
                                     } label: {
                                         ZStack {
                                             Rectangle()
                                                 .frame(height: 95)
-                                                .cornerRadius(30).foregroundColor(Color("colorWhite")).shadow(color: Color("colorBlueDark"), radius: 0, x: 1, y: 5)
-                                            Text(String(arr_answer_option[index].option))
+                                                .cornerRadius(30)
+                                                .foregroundColor(Color("colorWhite"))
+                                                .shadow(color: Color("colorBlueDark"), radius: 0, x: 1, y: 5)
+                                            Text(String(optionsAnswer[index].option))
                                                 .font(.system(size: 50, weight: .heavy, design: .rounded))
                                                 .foregroundColor(Color("colorBlack"))
                                         }
@@ -359,7 +370,7 @@ struct ExerciseView: View {
                             HStack(spacing: 30) {
                                 ForEach(2 ..< 4) { index in
                                     Button {
-                                            answerCheck(option: arr_answer_option[index].option)
+                                            answerCheck(option: optionsAnswer[index].option)
                                         }
                                 label: {
                                         ZStack {
@@ -368,7 +379,7 @@ struct ExerciseView: View {
                                                 .cornerRadius(30)
                                                 .foregroundColor(Color("colorWhite"))
                                                 .shadow(color: Color("colorBlueDark"), radius: 0, x: 1, y: 5)
-                                            Text(String(arr_answer_option[index].option))
+                                            Text(String(optionsAnswer[index].option))
                                                 .font(.system(size: 50, weight: .heavy, design: .rounded))
                                                 .foregroundColor(Color("colorBlack"))
                                         }
@@ -378,19 +389,21 @@ struct ExerciseView: View {
                         } else {
                             HStack(spacing: 30) {
                                 ForEach(0 ..< 2) { index in
-                                    if arr_answer_option[index].option == option_selected {
+                                    if optionsAnswer[index].option == optionSelected {
                                         ZStack {
                                             Rectangle()
                                                 .frame(height: 90)
                                                 .cornerRadius(30)
-                                                .foregroundColor(answer_status == true ? Color("colorGreen") : Color("colorWhite"))
+                                                .foregroundColor(
+                                                    answerStatus == true ? Color("colorGreen") : Color("colorWhite")
+                                                )
                                                 .shadow(color: Color("colorBlueDark"), radius: 0, x: 1, y: 5)
                                                 .overlay(RoundedRectangle(cornerRadius: 30)
                                                     .strokeBorder(Color("colorBlue"), lineWidth: 5))
                                                 .padding(2)
                                                 .overlay(RoundedRectangle(cornerRadius: 30)
                                                     .strokeBorder(Color("colorWhite"), lineWidth: 3))
-                                            Text(String(arr_answer_option[index].option))
+                                            Text(String(optionsAnswer[index].option))
                                                 .font(.system(size: 50, weight: .heavy, design: .rounded))
                                                 .foregroundColor(Color("colorBlack"))
                                         }.opacity(1)
@@ -399,29 +412,35 @@ struct ExerciseView: View {
                                             Rectangle()
                                                 .frame(height: 95)
                                                 .cornerRadius(30)
-                                                .foregroundColor(arr_answer_option[index].option == result ? Color("colorGreen") : Color("colorWhite"))
+                                                .foregroundColor(
+                                                    optionsAnswer[index].option ==
+                                                    result ? Color("colorGreen") : Color("colorWhite")
+                                                )
                                                 .shadow(color: Color("colorBlueDark"), radius: 0, x: 1, y: 5)
-                                            Text(String(arr_answer_option[index].option))
+                                            Text(String(optionsAnswer[index].option))
                                                 .font(.system(size: 50, weight: .heavy, design: .rounded))
                                                 .foregroundColor(Color("colorBlack"))
-                                        }.opacity(arr_answer_option[index].option == result ? 1 : 0.4)
+                                        }.opacity(optionsAnswer[index].option == result ? 1 : 0.4)
                                     }
                                 }
                             }
                             HStack(spacing: 30) {
                                 ForEach(2 ..< 4) { index in
-                                    if arr_answer_option[index].option == option_selected {
+                                    if optionsAnswer[index].option == optionSelected {
                                         ZStack {
                                             Rectangle()
                                                 .frame(height: 90)
                                                 .cornerRadius(30)
-                                                .foregroundColor(answer_status == true ? Color("colorGreen") : Color("colorWhite")).shadow(color: Color("colorBlueDark"), radius: 0, x: 1, y: 5)
+                                                .foregroundColor(
+                                                    answerStatus == true ? Color("colorGreen") : Color("colorWhite")
+                                                )
+                                                .shadow(color: Color("colorBlueDark"), radius: 0, x: 1, y: 5)
                                                 .overlay(RoundedRectangle(cornerRadius: 30)
                                                     .strokeBorder(Color("colorBlue"), lineWidth: 5))
                                                 .padding(2)
                                                 .overlay(RoundedRectangle(cornerRadius: 30)
                                                     .strokeBorder(Color("colorWhite"), lineWidth: 3))
-                                            Text(String(arr_answer_option[index].option))
+                                            Text(String(optionsAnswer[index].option))
                                                 .font(.system(size: 50, weight: .heavy, design: .rounded))
                                                 .foregroundColor(Color("colorBlack"))
                                         }.opacity(1)
@@ -430,12 +449,15 @@ struct ExerciseView: View {
                                             Rectangle()
                                                 .frame(height: 95)
                                                 .cornerRadius(30)
-                                                .foregroundColor(arr_answer_option[index].option == result ? Color("colorGreen") : Color("colorWhite"))
+                                                .foregroundColor(
+                                                    optionsAnswer[index].option ==
+                                                    result ? Color("colorGreen") : Color("colorWhite")
+                                                )
                                                 .shadow(color: Color("colorBlueDark"), radius: 0, x: 1, y: 5)
-                                            Text(String(arr_answer_option[index].option))
+                                            Text(String(optionsAnswer[index].option))
                                                 .font(.system(size: 50, weight: .heavy, design: .rounded))
                                                 .foregroundColor(Color("colorBlack"))
-                                        }.opacity(arr_answer_option[index].option == result ? 1 : 0.4)
+                                        }.opacity(optionsAnswer[index].option == result ? 1 : 0.4)
                                     }
                                 }
                             }

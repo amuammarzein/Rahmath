@@ -52,14 +52,17 @@ struct ResultView: View {
                     Text(statusText).font(.system(size: 48, weight: .heavy, design: .rounded))
                     ZStack {
                         ExplodingView().zIndex(10)
-                        Circle().foregroundColor(Color("colorGreen")).frame(width: 250).blur(radius: 50)
+                        Circle()
+                            .foregroundColor(Color("colorGreen"))
+                            .frame(width: 250).blur(radius: 50)
                         Image(emoji)
                             .resizable()
                             .scaledToFit()
                             .frame(width: 150)
                             .shadow(color: .black, radius: 2, x: 3, y: 3)
                             .offset(x: 0, y: movingIcon ? -5 : 0)
-                            .animation(.spring(response: 1, dampingFraction: 0.0, blendDuration: 0.0).repeatForever(autoreverses: false), value: movingIcon).task {
+                            .animation(.spring(response: 1, dampingFraction: 0.0, blendDuration: 0.0)
+                                .repeatForever(autoreverses: false), value: movingIcon).task {
                                 movingIcon.toggle()
                             }
                         Image("hero_selected_badge")
@@ -78,7 +81,8 @@ struct ResultView: View {
                         Text("Answer Correct!").font(.system(size: 20, weight: .regular, design: .rounded))
                     }
                     Text(statusBadgeText)
-                        .font(.system(size: 24, weight: .bold, design: .rounded)).multilineTextAlignment(.center)
+                        .font(.system(size: 24, weight: .bold, design: .rounded))
+                        .multilineTextAlignment(.center)
                     Text(statusBadgeText)
                         .font(.system(size: 18, weight: .light, design: .rounded))
                         .multilineTextAlignment(.center)
@@ -106,7 +110,8 @@ struct ResultView: View {
                     NavigationLink(destination: HomeView().navigationBarBackButtonHidden(true)) {
                         Text("I'll come back later")
                             .font(.system(size: 18, weight: .light, design: .rounded))
-                            .foregroundColor(Color("colorBlack")).padding(.top, 10)
+                            .foregroundColor(Color("colorBlack"))
+                            .padding(.top, 10)
                     }
 
                 }.frame(maxWidth: screenWidth)

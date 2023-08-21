@@ -187,7 +187,8 @@ struct HomeView: View {
                         .foregroundColor(Color("colorWhite"))
                         .font(.system(size: 20, weight: .regular, design: .rounded))
                         .padding(.top, 40).padding(.leading, 20).padding(.trailing, 20)
-                        .frame(maxWidth: .infinity).multilineTextAlignment(.center)
+                        .frame(maxWidth: .infinity)
+                        .multilineTextAlignment(.center)
 
                     NavigationLink(destination: TutorialView().navigationBarBackButtonHidden(true)) {
                         Text("Tutorial")
@@ -204,7 +205,9 @@ struct HomeView: View {
                     .shadow(color: Color("colorRedDark"), radius: 0, x: 1, y: 5)
                     .padding(.top, 10).padding(.leading, 20).padding(.trailing, 20)
                 }
-            }.frame(maxWidth: .infinity, maxHeight: .infinity).background(Color("colorBlue"))
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color("colorBlue"))
         }.task {
             getHapticsNotify(.success)
         }

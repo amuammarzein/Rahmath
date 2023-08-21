@@ -56,7 +56,9 @@ struct SelectHeroView: View {
                 ZStack {
                     Color(heroColor).edgesIgnoringSafeArea(.all)
                     Image("heroSelected")
-                        .resizable().scaledToFit().frame(width: screenWidth / 1.8)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: screenWidth / 1.8)
                     Image(heroImg)
                         .resizable()
                         .scaledToFit()
@@ -68,7 +70,8 @@ struct SelectHeroView: View {
                             movingIcon.toggle()
                         }
                     Image("heroSelected_badge")
-                        .resizable().scaledToFit().frame(width: screenWidth / 2)
+                        .resizable().scaledToFit()
+                        .frame(width: screenWidth / 2)
                         .shadow(color: .black, radius: 2, x: 3, y: 3)
 
                 }.onTapGesture {
@@ -77,8 +80,11 @@ struct SelectHeroView: View {
                 }
                 VStack(alignment: .leading) {
                     Color("colorWhite").edgesIgnoringSafeArea(.all)
-                    Text("Choose your hero").foregroundColor(Color.black)
-                        .font(Font.system(size: 20, design: .rounded).weight(.bold)).padding(.leading, 20).padding(.top, 30).padding(.bottom, 0)
+                    Text("Choose your hero")
+                        .foregroundColor(Color.black)
+                        .font(Font.system(size: 20, design: .rounded)
+                            .weight(.bold))
+                        .padding(.leading, 20).padding(.top, 30).padding(.bottom, 0)
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10) {
                             ForEach(0 ..< heroes.count, id: \.self) { index in
@@ -88,17 +94,29 @@ struct SelectHeroView: View {
                                 } label: {
                                     ZStack {
                                         if heroId == heroes[index].id {
-                                            Circle().fill(Color(heroes[index].color)).frame(width: screenWidth / 3.5, height: screenWidth / 3.5)
-                                            Circle().fill(Color("colorWhite")).frame(width: screenWidth / 3.7, height: screenWidth / 3.7)
+                                            Circle()
+                                                .fill(Color(heroes[index].color))
+                                                .frame(width: screenWidth / 3.5, height: screenWidth / 3.5)
+                                            Circle()
+                                                .fill(Color("colorWhite"))
+                                                .frame(width: screenWidth / 3.7, height: screenWidth / 3.7)
                                         } else {
-                                            Circle().fill(Color("colorWhite")).frame(width: screenWidth / 4.5, height: screenWidth / 4.5)
-                                            Circle().fill(Color("colorWhite")).frame(width: screenWidth / 4.7, height: screenWidth / 4.7)
+                                            Circle()
+                                                .fill(Color("colorWhite"))
+                                                .frame(width: screenWidth / 4.5, height: screenWidth / 4.5)
+                                            Circle()
+                                                .fill(Color("colorWhite"))
+                                                .frame(width: screenWidth / 4.7, height: screenWidth / 4.7)
                                         }
 
                                         Circle()
-                                            .fill(Color(heroes[index].color)).opacity(0.25).frame(width: screenWidth / 4, height: screenWidth / 4)
+                                            .fill(Color(heroes[index].color))
+                                            .opacity(0.25)
+                                            .frame(width: screenWidth / 4, height: screenWidth / 4)
                                         Image(heroes[index].img)
-                                            .resizable().scaledToFit().frame(width: screenWidth / 6).shadow(color: .black, radius: 2, x: 3, y: 3)
+                                            .resizable()
+                                            .scaledToFit().frame(width: screenWidth / 6)
+                                            .shadow(color: .black, radius: 2, x: 3, y: 3)
                                     }
                                 }
                             }
@@ -114,9 +132,11 @@ struct SelectHeroView: View {
                         TextField("Write your name", text: $heroName)
                             .padding(.leading, 10)
                             .frame(height: 60)
-                            .font(Font.system(size: 18, design: .rounded).weight(.bold))
+                            .font(Font.system(size: 18, design: .rounded)
+                                .weight(.bold))
                             .cornerRadius(15)
-                            .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color("colorRed"), lineWidth: 3))
+                            .overlay(RoundedRectangle(cornerRadius: 16)
+                                .stroke(Color("colorRed"), lineWidth: 3))
                             .padding(.trailing, 5).padding(.top, 4)
 
                         Button {
@@ -138,7 +158,10 @@ struct SelectHeroView: View {
 
                     }.padding(EdgeInsets(top: 10, leading: 20, bottom: 50, trailing: 20))
 
-                }.background(Color("colorWhite")).cornerRadius(50).padding(.top, -50)
+                }
+                .background(Color("colorWhite"))
+                    .cornerRadius(50)
+                    .padding(.top, -50)
             }
 
         }.task {
