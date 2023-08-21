@@ -388,7 +388,6 @@ class TutorialViewModel: ObservableObject {
                 }
                 if self.checkTutorial == true {
                     self.typeSays = "3"
-//                    playSound(file_name: "correct.mp3")
                 }
                 self.playSays()
             }
