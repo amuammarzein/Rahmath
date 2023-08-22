@@ -19,8 +19,7 @@ struct ExplodingView: View {
                         /* #-code-walkthrough(3b.explodingAnimation) */
                         .offset(x: isExploded ? (
                             Double.random(in: -1 ... 1) * 500) : 0, y: isExploded ? (
-                                Double.random(in: -1 ... 1) * 500) : 0
-                        )
+                                Double.random(in: -1 ... 1) * 500) : 0)
                         /* #-code-walkthrough(3b.explodingAnimation) */
                         /* #-code-walkthrough(4.explodingAnimation) */
                         .opacity(isExploded ? 0 : 1)

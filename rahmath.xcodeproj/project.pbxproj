@@ -185,6 +185,32 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		B38EF8BD2A949614004A9458 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BEE62DE429D75D9700DA7B14 /* ResultView.swift */,
+				BE87647E29DEFB32000B8CE0 /* ExplodingView.swift */,
+				BE9CEC8A29D866F20055937C /* OnboardingView.swift */,
+				BEE62DDE29D7222E00DA7B14 /* TutorialView.swift */,
+				BE9CEC8829D802F40055937C /* HomeView.swift */,
+				BEE62DE229D722A800DA7B14 /* ExerciseView.swift */,
+				BEE62DE029D7228700DA7B14 /* SelectHeroView.swift */,
+				BEBE4D8129D5FF5E00C0FFFF /* rahmathApp.swift */,
+				BEF8E41429DB29FF0021D537 /* Audio.swift */,
+				BE84549C29DD8CFB005F621F /* Utils.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B38EF8BE2A949638004A9458 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B38EF8A52A935B1A004A9458 /* TutorialViewModel.swift */,
+				B38EF8B22A93A964004A9458 /* ExerciseViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		BEBE4D7529D5FF5E00C0FFFF = {
 			isa = PBXGroup;
 			children = (
@@ -210,20 +236,10 @@
 		BEBE4D8029D5FF5E00C0FFFF /* rahmath */ = {
 			isa = PBXGroup;
 			children = (
+				B38EF8BE2A949638004A9458 /* ViewModel */,
+				B38EF8BD2A949614004A9458 /* View */,
 				B38EF8A72A935BDD004A9458 /* Model */,
 				BEE62DE729D76DA600DA7B14 /* Sound */,
-				BEE62DE429D75D9700DA7B14 /* ResultView.swift */,
-				BE87647E29DEFB32000B8CE0 /* ExplodingView.swift */,
-				BE9CEC8A29D866F20055937C /* OnboardingView.swift */,
-				BEE62DDE29D7222E00DA7B14 /* TutorialView.swift */,
-				B38EF8A52A935B1A004A9458 /* TutorialViewModel.swift */,
-				BE9CEC8829D802F40055937C /* HomeView.swift */,
-				BEBE4D8129D5FF5E00C0FFFF /* rahmathApp.swift */,
-				BEE62DE029D7228700DA7B14 /* SelectHeroView.swift */,
-				BEE62DE229D722A800DA7B14 /* ExerciseView.swift */,
-				B38EF8B22A93A964004A9458 /* ExerciseViewModel.swift */,
-				BEF8E41429DB29FF0021D537 /* Audio.swift */,
-				BE84549C29DD8CFB005F621F /* Utils.swift */,
 				BEBE4D8529D5FF5F00C0FFFF /* Assets.xcassets */,
 				BEBE4D8729D5FF5F00C0FFFF /* Preview Content */,
 			);
