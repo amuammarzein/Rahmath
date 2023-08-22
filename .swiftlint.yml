@@ -1,16 +1,9 @@
 # at v0.6.0
 disabled_rules:
-#  - force_cast
-#  - force_try
   - function_body_length
-#  - line_length
-#  - nesting
-#  - todo
   - type_body_length
-#  - type_name
   - identifier_name
   - cyclomatic_complexity
-#  - variable_name
 
 file_length:
   warning: 500

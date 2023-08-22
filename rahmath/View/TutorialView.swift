@@ -10,7 +10,7 @@ import SwiftUI
 
 struct TutorialView: View {
     @ObservedObject var viewModel = TutorialViewModel()
-
+    
     @State var isPop: Bool = false
 
     var body: some View {

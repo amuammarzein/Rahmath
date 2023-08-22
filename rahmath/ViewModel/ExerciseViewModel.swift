@@ -75,12 +75,12 @@ class ExerciseViewModel: ObservableObject {
             selectedAnswers.append(ModelAnswerSelectedExercise(option: optionSelected, status: false))
         }
         if questionNum == questionLimit {
-            calculate_badge()
+            calculateBadge()
         }
         print("Answer Check : " + String(checkAnswer))
     }
 
-    func calculate_badge() {
+    func calculateBadge() {
         if correctAnswer == 4 {
             badge1 += 1
         } else if correctAnswer == 3 {
